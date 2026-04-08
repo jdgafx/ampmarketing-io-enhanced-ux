@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Form detection stub — not user facing</title>
+</head>
+<body>
+<!--
+  This file exists so Netlify's build-time form scanner can register the forms
+  used by our client-rendered React components. Next.js static export does not
+  emit the JSX forms into plain HTML in a way Netlify can detect, so we declare
+  them here with matching field names. See Netlify docs: "Forms setup" →
+  "Add a form with a framework".
+
+  Form name is prefixed "amp-marketing-" so submissions are clearly distinct
+  from the PME clone site's forms (both forward to michael@primemarketingexperts.com).
+-->
+<form name="amp-marketing-contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <input type="tel" name="phone" />
+  <input type="text" name="company" />
+  <input type="text" name="service_interest" />
+  <textarea name="message"></textarea>
+  <input type="text" name="subject" />
+  <input type="text" name="bot-field" />
+</form>
+</body>
+</html>
