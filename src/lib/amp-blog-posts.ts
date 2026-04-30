@@ -49,10 +49,8 @@ const linkGBPAlt = '<a href="/services/google-business" style="color:var(--amp-p
 const linkLanding = '<a href="/services/landing-pages" style="color:var(--amp-primary);text-decoration:underline;font-weight:500">landing page design</a>'
 const linkLandingAlt = '<a href="/services/landing-pages" style="color:var(--amp-primary);text-decoration:underline;font-weight:500">a landing page built to convert</a>'
 const linkFunnel = '<a href="/services/lead-funnel" style="color:var(--amp-primary);text-decoration:underline;font-weight:500">lead funnel buildout</a>'
-const linkFunnelAlt = '<a href="/services/lead-funnel" style="color:var(--amp-primary);text-decoration:underline;font-weight:500">full funnel strategy</a>'
 const linkSeoContent = '<a href="/services/seo-content" style="color:var(--amp-primary);text-decoration:underline;font-weight:500">SEO content</a>'
 const linkSocial = '<a href="/services/social-media" style="color:var(--amp-primary);text-decoration:underline;font-weight:500">social media management</a>'
-const linkSocialAlt = '<a href="/services/social-media" style="color:var(--amp-primary);text-decoration:underline;font-weight:500">social media content</a>'
 const linkReview = '<a href="/services/review-response" style="color:var(--amp-primary);text-decoration:underline;font-weight:500">review response service</a>'
 const linkReviewAlt = '<a href="/services/review-response" style="color:var(--amp-primary);text-decoration:underline;font-weight:500">our review management system</a>'
 
