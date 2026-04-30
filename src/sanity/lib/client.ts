@@ -66,6 +66,11 @@ export async function getPost(slug: string) {
       slug,
       excerpt,
       mainImage,
+      gallery[]{
+        asset,
+        alt,
+        caption
+      },
       body,
       publishedAt,
       readTime,

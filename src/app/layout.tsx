@@ -1,12 +1,27 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Fraunces, JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import AnimatedBackground from "../components/AnimatedBackground";
+import CursorTracker from "../components/CursorTracker";
 
-const poppins = Poppins({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-poppins",
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -20,11 +35,11 @@ export const metadata: Metadata = {
   authors: [{ name: "AMP Marketing" }],
   creator: "AMP Marketing",
   publisher: "AMP Marketing",
-  metadataBase: new URL("https://melodic-flow-enhanced-ux.netlify.app"),
+  metadataBase: new URL("https://ampmarketing-io-enhanced-ux.netlify.app"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://melodic-flow-enhanced-ux.netlify.app",
+    url: "https://ampmarketing-io-enhanced-ux.netlify.app",
     siteName: "AMP Marketing",
     title: "AMP Marketing | Smart Tools That Grow Your Business",
     description: "We help you automate lead capture and sales follow-ups with smart technology that actually works.",
@@ -65,7 +80,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "AMP Marketing",
-    "image": "https://melodic-flow-enhanced-ux.netlify.app/logo-amp-marketing.svg",
+    "image": "https://ampmarketing-io-enhanced-ux.netlify.app/logo-amp-marketing.svg",
     "description": "We help businesses get more leads and save time with smart marketing tools that work around the clock.",
     "address": {
       "@type": "PostalAddress",
@@ -77,7 +92,7 @@ export default function RootLayout({
     },
     "telephone": "+1-617-651-1457",
     "email": "hello@ampmarketing.io",
-    "url": "https://melodic-flow-enhanced-ux.netlify.app",
+    "url": "https://ampmarketing-io-enhanced-ux.netlify.app",
     "priceRange": "$$",
     "openingHoursSpecification": [
       {
@@ -106,7 +121,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en" className={`${fraunces.variable} ${jetbrainsMono.variable} ${inter.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -118,27 +133,13 @@ export default function RootLayout({
         <meta name="ICBM" content="42.7654, -71.4676" />
         <link rel="icon" href="/favicon-amp.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon-amp.svg" />
-        <link rel="icon" type="image/svg+xml" sizes="32x32" href="/favicon-amp.svg" />
-        <link rel="icon" type="image/svg+xml" sizes="16x16" href="/favicon-amp.svg" />
-        {/* Google Analytics - uncomment and replace ID when tracking ID is available
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XXXXXXXXXX');
-            `,
-          }}
-        />
-        */}
       </head>
-      <body className="antialiased">
-        <AnimatedBackground />
-        <div className="relative z-10">
-          {children}
-        </div>
+      <body>
+        <div className="bg-field" aria-hidden="true" />
+        <div className="bg-grid" aria-hidden="true" />
+        <div className="bg-grain" aria-hidden="true" />
+        <CursorTracker />
+        {children}
       </body>
     </html>
   );

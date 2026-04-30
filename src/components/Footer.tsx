@@ -1,84 +1,41 @@
-import React from 'react';
-import { Zap, Mail, Phone, MapPin, Twitter, Linkedin, Instagram } from 'lucide-react';
 import Link from 'next/link';
 
-const Footer: React.FC = () => {
+const BrandSvgFooter = () => (
+  <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="ampGradF" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stopColor="#6366f1" />
+        <stop offset="60%" stopColor="#8b5cf6" />
+        <stop offset="100%" stopColor="#3b82f6" />
+      </linearGradient>
+    </defs>
+    <path d="M7 32 L20 6 L33 32" stroke="url(#ampGradF)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <path d="M11.5 22 Q14.5 17, 17 22 T22 22 T28.5 22" stroke="#E2E8F0" strokeWidth="2" strokeLinecap="round" fill="none" />
+  </svg>
+);
+
+export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black/80 backdrop-blur-xl pt-20 pb-10 relative z-10">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 mb-16">
-            <div className="col-span-1 md:col-span-1">
-                 
-                 {/* Footer Logo */}
-                 <Link href="/" className="flex items-center gap-3 cursor-pointer group select-none mb-6">
-                    <div className="relative w-11 h-11 rounded-xl bg-gradient-to-b from-blue-500 to-purple-600 p-[1px] shadow-lg shadow-purple-500/20 flex-shrink-0">
-                    <div className="w-full h-full bg-[#0a0a0f] rounded-[10px] flex items-center justify-center relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-transparent to-purple-500/20 opacity-50"></div>
-                        <Zap className="w-5 h-5 text-white fill-white" style={{ filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.4))' }} />
-                    </div>
-                    </div>
-
-                    <div className="flex flex-col justify-center">
-                    <div className="flex items-baseline leading-none mb-0.5">
-                        <span className="text-xl font-bold text-white tracking-tight mr-1">AMP</span>
-                        <span className="text-xl font-black text-white drop-shadow-[0_2px_5px_rgba(255,255,255,0.3)]">Marketing</span>
-                    </div>
-                    <span className="text-[10px] font-extrabold text-slate-400 tracking-[0.2em] uppercase pl-0.5">Growth on Autopilot</span>
-                    </div>
-                 </Link>
-
-                 <p className="text-gray-500 mb-6 leading-relaxed text-sm">
-                    Growth on autopilot. We build systems that help businesses scale without the headache.
-                 </p>
-                 <div className="flex gap-4">
-                    <a href="https://twitter.com/ampmarketing" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors cursor-pointer flex items-center justify-center text-gray-400 hover:text-white">
-                        <Twitter className="w-5 h-5" />
-                    </a>
-                    <a href="https://linkedin.com/company/ampmarketing" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors cursor-pointer flex items-center justify-center text-gray-400 hover:text-white">
-                        <Linkedin className="w-5 h-5" />
-                    </a>
-                    <a href="https://instagram.com/ampmarketing" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors cursor-pointer flex items-center justify-center text-gray-400 hover:text-white">
-                        <Instagram className="w-5 h-5" />
-                    </a>
-                 </div>
-            </div>
-            
-            <div>
-                <h4 className="text-white font-black text-xs uppercase tracking-[0.2em] mb-8">Services</h4>
-                <ul className="space-y-4 text-gray-500 text-sm font-medium">
-                    <li><Link href="/services/ai-chatbot" className="hover:text-indigo-500 transition-colors">AI Chatbot</Link></li>
-                    <li><Link href="/services/ai-voice" className="hover:text-indigo-500 transition-colors">AI Voice</Link></li>
-                    <li><Link href="/services/lead-funnel" className="hover:text-indigo-500 transition-colors">Sales Funnels</Link></li>
-                    <li><Link href="/services/seo-content" className="hover:text-indigo-500 transition-colors">SEO Engine</Link></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 className="text-white font-black text-xs uppercase tracking-[0.2em] mb-8">Company</h4>
-                <ul className="space-y-4 text-gray-500 text-sm font-medium">
-                    <li><Link href="/about" className="hover:text-indigo-500 transition-colors">About Us</Link></li>
-                    <li><Link href="/pricing" className="hover:text-indigo-500 transition-colors">Pricing</Link></li>
-                    <li><Link href="/contact" className="hover:text-indigo-500 transition-colors">Contact</Link></li>
-                    <li><Link href="/blog" className="hover:text-indigo-500 transition-colors">Blog</Link></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 className="text-white font-black text-xs uppercase tracking-[0.2em] mb-8">Legal</h4>
-                <ul className="space-y-4 text-gray-500 text-sm font-medium">
-                    <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-                    <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
-                    <li><Link href="/cookies" className="hover:text-white transition-colors">Cookie Policy</Link></li>
-                </ul>
-            </div>
+    <footer className="footer">
+      <div className="shell">
+        <span className="footer-brand">
+          <span className="brand-mark" aria-hidden="true">
+            <BrandSvgFooter />
+          </span>
+          <span>amp marketing · nashua, nh · 2026 · ai-native</span>
+        </span>
+        <div className="links">
+          <Link href="/services">services</Link>
+          <span className="dotsep">·</span>
+          <a href="mailto:hello@ampmarketing.io">email</a>
+          <span className="dotsep">·</span>
+          <a href="tel:6176511457">617-651-1457</a>
+          <span className="dotsep">·</span>
+          <Link href="/blog">blog</Link>
+          <span className="dotsep">·</span>
+          <Link href="/contact">contact</Link>
         </div>
-        <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-600 text-[10px] font-bold uppercase tracking-widest">© 2026 AMP Marketing. All rights reserved.</p>
-            <div className="flex gap-8 text-[10px] text-gray-600 font-bold uppercase tracking-widest">
-                <span className="text-gray-600 text-[8px] tracking-wider">built by Chris Gentile / CGDarkstardev1 / NewDawn AI</span>
-            </div>
-        </div>
-      </footer>
+      </div>
+    </footer>
   );
-};
-
-export default Footer;
+}

@@ -122,6 +122,35 @@ export const postType = defineType({
       ],
     }),
     defineField({
+      name: 'gallery',
+      title: 'Gallery (additional images)',
+      type: 'array',
+      group: 'content',
+      description:
+        'Optional. Add multiple extra images that render in a grid below the article body. Each image needs alt text for SEO. Leave empty if you only want the main image.',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt text',
+              type: 'string',
+              validation: (Rule) =>
+                Rule.required().error('Alt text is required for SEO and accessibility.'),
+            }),
+            defineField({
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+              description: 'Optional caption rendered below the image.',
+            }),
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'reference',

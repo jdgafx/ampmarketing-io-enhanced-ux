@@ -1,4 +1,5 @@
-import { Navbar, Footer } from '@/components/Layout';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { getPosts, urlFor } from '@/sanity/lib/client';
 import Image from 'next/image';
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AMP Marketing Blog | AI Marketing Tips & Growth Strategies",
     description: "Practical marketing advice for small businesses. Learn about AI chatbots, lead generation, SEO, and more.",
-    url: "https://melodic-flow-enhanced-ux.netlify.app/blog",
+    url: "https://ampmarketing-io-enhanced-ux.netlify.app/blog",
   },
 };
 
@@ -33,15 +34,6 @@ const fallbackPosts = [
         readTime: 10,
         slug: { current: '' },
         url: 'https://www.ruh.ai/blogs/best-ai-sales-agents-for-business'
-    },
-    {
-        title: 'The Ultimate AI Marketing Strategy Guide',
-        excerpt: 'Goes beyond email writing. Shows you how to find good prospects by looking at what people actually do on your site.',
-        category: 'Strategy',
-        publishedAt: '2025-01-15',
-        readTime: 15,
-        slug: { current: '' },
-        url: 'https://reply.io/blog/ai-marketing-strategy/'
     },
     {
         title: 'Top AI Lead Generation Software to Watch in 2025',
@@ -73,12 +65,12 @@ const fallbackPosts = [
 ];
 
 const gradients = [
-    'bg-gradient-to-br from-blue-500 to-indigo-600',
-    'bg-gradient-to-br from-emerald-500 to-teal-600',
-    'bg-gradient-to-br from-amber-500 to-orange-600',
-    'bg-gradient-to-br from-red-500 to-pink-600',
-    'bg-gradient-to-br from-violet-500 to-purple-600',
-    'bg-gradient-to-br from-cyan-500 to-blue-600',
+    'linear-gradient(135deg, #3b82f6, #4f46e5)',
+    'linear-gradient(135deg, #10b981, #0d9488)',
+    'linear-gradient(135deg, #f59e0b, #ea580c)',
+    'linear-gradient(135deg, #ef4444, #ec4899)',
+    'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+    'linear-gradient(135deg, #06b6d4, #3b82f6)',
 ];
 
 interface Post {
@@ -95,7 +87,7 @@ interface Post {
 
 export default async function BlogPage() {
     let posts: Post[] = [];
-    
+
     try {
         const sanityPosts = await getPosts();
         if (sanityPosts && sanityPosts.length > 0) {
@@ -108,54 +100,74 @@ export default async function BlogPage() {
     }
 
     return (
-        <main className="min-h-screen bg-transparent font-poppins text-gray-200">
+        <>
             <Navbar />
 
-            <section className="bg-transparent py-24 pt-32">
-                <div className="container mx-auto px-4 text-center">
-                    <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6">What We're Reading</h1>
-                    <p className="max-w-3xl mx-auto text-xl text-gray-400 leading-relaxed italic">
+            <header className="svc-hero">
+                <div className="shell">
+                    <div className="shape-meta fade-up">
+                        <span className="num">SHAPE · 12</span>
+                        <span className="bul">·</span>
+                        <span>blog</span>
+                        <span className="bul">·</span>
+                        <span>no-fluff</span>
+                    </div>
+                    <h1 className="fade-up" style={{ animationDelay: '0.05s' }}>
+                        What We&apos;re<br />
+                        <em>Reading.</em>
+                    </h1>
+                    <p className="lede fade-up" style={{ animationDelay: '0.1s' }}>
                         Articles we found useful about getting more leads and growing your business. No fluff.
                     </p>
                 </div>
-            </section>
+            </header>
 
-            <section className="py-20">
-                <div className="container mx-auto px-4 max-w-6xl">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <section className="section tight section-rule">
+                <div className="shell">
+                    <div data-reveal style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }}>
                         {posts.map((post, idx) => {
                             const isExternal = 'url' in post && post.url;
                             const href = isExternal ? post.url! : `/blog/${post.slug.current}`;
                             const linkProps = isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {};
-                            
+
                             return (
-                                <Link 
-                                    key={post._id || idx} 
+                                <Link
+                                    key={post._id || idx}
                                     href={href}
                                     {...linkProps}
-                                    className="flex flex-col group cursor-pointer"
+                                    style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', border: '1px solid var(--line)', transition: 'border-color 0.2s' }}
+                                    className="blog-card"
                                 >
-                                    <div className={`h-48 rounded-lg mb-6 ${post.mainImage ? '' : gradients[idx % gradients.length]} flex items-center justify-center overflow-hidden relative`}>
+                                    <div style={{
+                                        height: '180px',
+                                        overflow: 'hidden',
+                                        position: 'relative',
+                                        background: gradients[idx % gradients.length],
+                                        borderBottom: '1px solid var(--line)',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                    }}>
                                         {post.mainImage ? (
-                                            <Image 
-                                                src={urlFor(post.mainImage).width(400).height(200).url()}
+                                            <Image
+                                                src={urlFor(post.mainImage).width(400).height(180).url()}
                                                 alt={post.title}
                                                 fill
-                                                className="object-cover"
+                                                style={{ objectFit: 'cover' }}
                                             />
                                         ) : (
-                                            <span className="text-6xl text-white/30">📄</span>
+                                            <span style={{ fontSize: '48px', opacity: 0.25 }}>📄</span>
                                         )}
                                     </div>
-                                    <div className="text-blue-500 text-xs font-bold uppercase tracking-widest mb-2">{post.category}</div>
-                                    <h3 className="text-xl font-extrabold text-white mb-4 leading-tight group-hover:text-blue-500 transition-colors">{post.title}</h3>
-                                    <p className="text-gray-400 text-sm mb-4 leading-relaxed flex-grow">{post.excerpt}</p>
-                                    <div className="flex items-center justify-between text-gray-400 text-sm">
-                                        <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
-                                        <span>{post.readTime} min read</span>
-                                    </div>
-                                    <div className="mt-4 text-blue-500 font-bold text-sm uppercase tracking-widest flex items-center">
-                                        Read Article <span className="ml-2 text-xl group-hover:translate-x-2 transition-transform">→</span>
+                                    <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', color: 'var(--amp-primary)', textTransform: 'uppercase', marginBottom: '10px' }}>{post.category}</div>
+                                        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 700, color: 'var(--amp-text)', lineHeight: 1.35, marginBottom: '12px' }}>{post.title}</h3>
+                                        <p style={{ fontSize: '13px', color: 'var(--amp-muted)', lineHeight: 1.65, flexGrow: 1, marginBottom: '16px' }}>{post.excerpt}</p>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--amp-muted)', letterSpacing: '0.04em' }}>{new Date(post.publishedAt).toLocaleDateString()}</span>
+                                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--amp-muted)', letterSpacing: '0.04em' }}>{post.readTime} min read</span>
+                                        </div>
+                                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--amp-primary)', letterSpacing: '0.06em', textTransform: 'uppercase', marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--line)' }}>
+                                            Read Article →
+                                        </div>
                                     </div>
                                 </Link>
                             );
@@ -164,24 +176,21 @@ export default async function BlogPage() {
                 </div>
             </section>
 
-            <section className="py-20 bg-black/20">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-bold text-white mb-6">Want to Talk Shop?</h2>
-                    <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-                        We help businesses get more leads without all the headaches. Curious if we can help you? Let's chat.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link href="/contact" className="bg-indigo-600 text-white px-8 py-4 rounded-full font-bold hover:bg-indigo-700 transition-colors">
-                            Book a Free Call
-                        </Link>
-                        <Link href="/pricing" className="bg-white/5 text-white border-2 border-white/10 px-8 py-4 rounded-full font-bold hover:bg-white/10 backdrop-blur-sm transition-colors">
-                            View Pricing
-                        </Link>
+            <section className="closing">
+                <div className="shell">
+                    <div className="section-head" data-reveal>
+                        <div className="eyebrow">→ want to talk shop?</div>
+                        <h2>Let&apos;s See If<br />We Can Help.</h2>
+                        <p className="lede">We help businesses get more leads without all the headaches. Curious if we can help you? Let&apos;s chat.</p>
+                    </div>
+                    <div className="closing-actions" data-reveal>
+                        <Link href="/contact" className="btn btn-primary">→ Book a Free Call</Link>
+                        <Link href="/pricing" className="btn btn-ghost">← View Pricing</Link>
                     </div>
                 </div>
             </section>
 
             <Footer />
-        </main>
+        </>
     );
 }

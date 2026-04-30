@@ -104,165 +104,187 @@ export default function PricingClient() {
         }
     ];
 
+    const tableRows = [
+        { feature: 'AI Chatbot', starter: true, pro: true, enterprise: true },
+        { feature: 'AI Voice', starter: false, pro: true, enterprise: true },
+        { feature: 'Google Business', starter: true, pro: true, enterprise: true },
+        { feature: 'Review Response', starter: true, pro: true, enterprise: true },
+        { feature: 'Email Automation', starter: false, pro: true, enterprise: true },
+        { feature: 'Social Media', starter: false, pro: true, enterprise: true },
+        { feature: 'Ad Copy', starter: false, pro: true, enterprise: true },
+        { feature: 'SEO Content', starter: false, pro: false, enterprise: '4/mo' },
+        { feature: 'Landing Pages', starter: false, pro: false, enterprise: '2/mo' },
+        { feature: 'Automated Sales Funnels', starter: false, pro: false, enterprise: true },
+        { feature: 'Custom Integrations', starter: false, pro: true, enterprise: true },
+        { feature: 'Support Response Time', starter: '48hr', pro: '24hr', enterprise: 'Same day' },
+        { feature: 'Strategy Calls', starter: false, pro: 'Weekly', enterprise: '2x/week' },
+        { feature: 'Dedicated Manager', starter: false, pro: false, enterprise: true },
+        { feature: 'Customization', starter: 'Standard', pro: 'Full', enterprise: 'Unlimited' },
+    ] as Array<{ feature: string; starter: boolean | string; pro: boolean | string; enterprise: boolean | string }>;
+
     return (
-        <main className="min-h-screen bg-transparent font-poppins text-gray-200">
+        <>
             <Navbar />
 
-            <section className="bg-transparent py-20 pt-32">
-                <div className="container mx-auto px-4 text-center">
-                    <span className="inline-block bg-emerald-500/10 text-emerald-400 px-4 py-2 rounded-full text-sm font-semibold mb-6 uppercase tracking-wider border border-emerald-500/20">
-                        Transparent Pricing
-                    </span>
-                    <h1 className="text-4xl md:text-6xl font-black mb-6 text-white">
-                        Straightforward Prices. <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">No Hidden Fees.</span>
+            <header className="svc-hero">
+                <div className="shell">
+                    <div className="shape-meta fade-up">
+                        <span className="num">SHAPE · 11</span>
+                        <span className="bul">·</span>
+                        <span>pricing</span>
+                        <span className="bul">·</span>
+                        <span>transparent</span>
+                    </div>
+                    <h1 className="fade-up" style={{ animationDelay: '0.05s' }}>
+                        Straightforward Prices.<br />
+                        <em>No Hidden Fees.</em>
                     </h1>
-                    <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
-                        No sneaky fees. No contracts locking you in. Everything&apos;s customizable—because that&apos;s how we do things.
+                    <p className="lede fade-up" style={{ animationDelay: '0.1s' }}>
+                        No sneaky fees. No contracts locking you in. Everything&apos;s customizable&mdash;because that&apos;s how we do things.
                     </p>
-                    <div className="flex items-center justify-center gap-4 mb-4">
-                        <span className={`text-lg ${!isAnnual ? 'text-white font-bold' : 'text-gray-500'}`}>Monthly</span>
-                        <button onClick={() => setIsAnnual(!isAnnual)} className={`relative w-14 h-8 rounded-full transition-colors ${isAnnual ? 'bg-emerald-500' : 'bg-gray-700'}`}>
-                            <div className={`absolute top-1 w-6 h-6 bg-white rounded-full transition-transform ${isAnnual ? 'translate-x-7' : 'translate-x-1'}`}></div>
+                    <div className="fade-up" style={{ animationDelay: '0.18s', display: 'flex', alignItems: 'center', gap: '14px', marginTop: '32px' }}>
+                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', letterSpacing: '0.04em', color: !isAnnual ? 'var(--amp-text)' : 'var(--amp-muted)' }}>Monthly</span>
+                        <button
+                            onClick={() => setIsAnnual(!isAnnual)}
+                            style={{
+                                position: 'relative', width: '48px', height: '26px', borderRadius: '13px',
+                                background: isAnnual ? 'var(--amp-primary)' : 'var(--line-strong)',
+                                border: 'none', cursor: 'pointer', transition: 'background 0.2s', flexShrink: 0
+                            }}
+                            aria-label="Toggle billing period"
+                        >
+                            <div style={{
+                                position: 'absolute', top: '3px', width: '20px', height: '20px', borderRadius: '50%',
+                                background: 'white', transition: 'transform 0.2s',
+                                transform: isAnnual ? 'translateX(25px)' : 'translateX(3px)'
+                            }} />
                         </button>
-                        <span className={`text-lg ${isAnnual ? 'text-white font-bold' : 'text-gray-500'}`}>Annual</span>
-                        {isAnnual && <span className="bg-emerald-500/20 text-emerald-400 text-xs px-2 py-1 rounded-full font-bold border border-emerald-500/30">Save 17%</span>}
+                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', letterSpacing: '0.04em', color: isAnnual ? 'var(--amp-text)' : 'var(--amp-muted)' }}>Annual</span>
+                        {isAnnual && (
+                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.04em', padding: '3px 10px', border: '1px solid var(--amp-primary)', borderRadius: '12px', color: 'var(--amp-primary)' }}>Save 17%</span>
+                        )}
                     </div>
                 </div>
-            </section>
+            </header>
 
-            <section className="py-20 relative z-10">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <section className="section tight section-rule">
+                <div className="shell">
+                    <span className="section-counter">01 / 04</span>
+                    <div className="section-head" data-reveal>
+                        <div className="eyebrow">platform plans · choose your level</div>
+                        <h2>Pick Your<br />Plan.</h2>
+                    </div>
+                    <div data-reveal style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start', marginTop: '48px' }}>
                         {platformTiers.map((tier, idx) => (
-                            <div key={idx} className={`relative bg-white/5 rounded-3xl p-8 border-2 transition-all hover:shadow-2xl backdrop-blur-sm ${tier.popular ? 'border-indigo-500 scale-105 bg-white/10' : 'border-white/10 hover:bg-white/10'}`}>
+                            <aside
+                                key={idx}
+                                className="price-card"
+                                style={{
+                                    position: 'relative',
+                                    transform: tier.popular ? 'translateY(-8px)' : 'none',
+                                    borderColor: tier.popular ? 'var(--amp-primary)' : undefined,
+                                }}
+                            >
                                 {tier.popular && (
-                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg shadow-indigo-500/20">
-                                        Most Popular
-                                    </div>
+                                    <div style={{
+                                        position: 'absolute', top: '-14px', left: '50%', transform: 'translateX(-50%)',
+                                        background: 'var(--amp-primary)', color: 'white',
+                                        fontSize: '11px', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em',
+                                        padding: '4px 14px', borderRadius: '12px', whiteSpace: 'nowrap', textTransform: 'uppercase'
+                                    }}>Most Popular</div>
                                 )}
-                                <h3 className="text-2xl font-bold text-white mb-2">{tier.name}</h3>
-                                <p className="text-gray-400 text-sm mb-6">{tier.description}</p>
-                                <div className="mb-6">
-                                    <span className="text-gray-400 text-sm block mb-1">Starting at</span>
-                                    <span className="text-5xl font-black text-white">${isAnnual ? tier.annualPrice : tier.monthlyPrice}</span>
-                                    <span className="text-gray-500 text-sm ml-2">/month</span>
-                                    {isAnnual && <p className="text-emerald-400 text-sm font-semibold mt-1">Billed annually (${tier.annualPrice * 12}/yr)</p>}
+                                <div className="label">{tier.name.toLowerCase()} · plan</div>
+                                <div className="price">
+                                    from <em>${isAnnual ? tier.annualPrice : tier.monthlyPrice}</em>/mo
                                 </div>
-                                <ul className="space-y-3 mb-8">
+                                <div className="sub">{tier.description}</div>
+                                {isAnnual && (
+                                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--amp-primary)', marginBottom: '16px', letterSpacing: '0.04em' }}>
+                                        Billed annually (${(isAnnual ? tier.annualPrice : tier.monthlyPrice) * 12}/yr)
+                                    </p>
+                                )}
+                                <ul className="checklist" style={{ marginBottom: '24px' }}>
                                     {tier.features.map((feature, fIdx) => (
-                                        <li key={fIdx} className="flex items-start gap-3">
-                                            <svg className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                            <span className="text-gray-300 text-sm">{feature}</span>
-                                        </li>
+                                        <li key={fIdx}>{feature}</li>
                                     ))}
                                 </ul>
-                                <Link href="/contact" className={`block w-full text-center py-4 rounded-xl font-bold transition-all ${tier.popular ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40' : 'bg-white/10 text-white hover:bg-white/20'}`}>
-                                    Learn More
-                                </Link>
-                            </div>
+                                <Link href="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>→ {tier.cta}</Link>
+                                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--amp-muted)', textAlign: 'center', marginTop: '18px', letterSpacing: '0.04em' }}>try it free for 7 days.</p>
+                            </aside>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section className="py-24">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Just Need One Thing?</h2>
-                        <p className="text-gray-400 max-w-2xl mx-auto">
-                            Not everyone needs the full package. Grab what makes sense for you. We can tweak any of these to fit.
-                        </p>
+            <section className="section tight section-rule">
+                <div className="shell">
+                    <span className="section-counter">02 / 04</span>
+                    <div className="section-head" data-reveal>
+                        <div className="eyebrow">pick what you need · no bundle required</div>
+                        <h2>Just Need<br />One Thing?</h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <p className="lede" data-reveal style={{ marginBottom: '40px' }}>
+                        Not everyone needs the full package. Grab what makes sense for you. We can tweak any of these to fit.
+                    </p>
+                    <div data-reveal style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1px', background: 'var(--line)', border: '1px solid var(--line)', marginBottom: '40px' }}>
                         {alaCarteServices.map((service, idx) => (
-                            <div key={idx} className="bg-white/5 rounded-2xl p-6 border border-white/10 hover:border-indigo-500/50 hover:bg-white/10 transition-all group backdrop-blur-sm">
-                                <div className="flex justify-between items-start mb-3">
-                                    <h3 className="text-lg font-bold text-white group-hover:text-violet-500 transition-colors">
-                                        {service.name}
-                                    </h3>
+                            <div key={idx} style={{ padding: '24px', background: 'var(--amp-bg)' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px', gap: '8px' }}>
+                                    <span style={{ fontFamily: 'var(--font-display)', fontSize: '16px', fontWeight: 700, color: 'var(--amp-text)', lineHeight: 1.3 }}>{service.name}</span>
                                     {service.oneTime && (
-                                        <span className="bg-amber-500/10 text-amber-400 text-xs px-2 py-1 rounded-full font-semibold border border-amber-500/20">One-time</span>
+                                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.06em', padding: '2px 8px', border: '1px solid var(--line-strong)', color: 'var(--amp-muted)', whiteSpace: 'nowrap', flexShrink: 0 }}>one-time</span>
                                     )}
                                 </div>
-                                <p className="text-gray-400 text-sm mb-4">{service.description}</p>
-                                <div className="flex items-baseline gap-2">
-                                    <span className="text-2xl font-black text-violet-500">{service.price}</span>
-                                    {service.oneTime ? (
-                                        <span className="text-gray-500 text-sm">one-time</span>
-                                    ) : (
-                                        <span className="text-gray-500 text-sm">/mo</span>
-                                    )}
-                                </div>
-                                    {service.setup && (
-                                        <p className="text-gray-500 text-xs mt-2 font-medium">+ {service.setup}</p>
-                                    )}
-                                <div className="mt-4 pt-4 border-t border-white/5">
-                                    <p className="text-xs text-emerald-400 font-medium">✓ We'll tailor it to you</p>
-                                    <p className="text-xs text-emerald-400 font-medium">✓ Help with setup included</p>
-                                </div>
+                                <p style={{ fontSize: '13px', color: 'var(--amp-muted)', marginBottom: '14px', lineHeight: 1.5 }}>{service.description}</p>
+                                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', color: 'var(--amp-primary)', fontWeight: 700 }}>{service.price}</div>
+                                {service.setup && (
+                                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--amp-muted)', marginTop: '4px', letterSpacing: '0.03em' }}>+ {service.setup}</div>
+                                )}
                             </div>
                         ))}
                     </div>
-                    <div className="text-center mt-12">
-                        <Link href="/contact" className="inline-block bg-white/5 border-2 border-indigo-500 text-white px-8 py-4 rounded-full font-bold hover:bg-indigo-500 transition-all backdrop-blur-sm">
-                            Get Custom Quote
-                        </Link>
+                    <div style={{ textAlign: 'center' }} data-reveal>
+                        <Link href="/contact" className="btn btn-ghost">→ Get Custom Quote</Link>
                     </div>
                 </div>
             </section>
 
-            <section className="py-24 bg-black/20">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-black text-white mb-4">What's in Each Plan?</h2>
-                        <p className="text-gray-400">Here's the breakdown so you know what you're getting</p>
+            <section className="section tight section-rule">
+                <div className="shell">
+                    <span className="section-counter">03 / 04</span>
+                    <div className="section-head" data-reveal>
+                        <div className="eyebrow">plan breakdown · feature matrix</div>
+                        <h2>What&apos;s in<br />Each Plan?</h2>
                     </div>
-                    <div className="max-w-5xl mx-auto overflow-x-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm p-1">
-                        <table className="w-full">
+                    <p className="lede" data-reveal style={{ marginBottom: '40px' }}>Here&apos;s the breakdown so you know what you&apos;re getting.</p>
+                    <div data-reveal style={{ overflowX: 'auto', border: '1px solid var(--line)' }}>
+                        <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-sans)', minWidth: '560px' }}>
                             <thead>
-                                <tr className="border-b border-white/10">
-                                    <th className="text-left py-6 px-6 font-bold text-white">Feature</th>
-                                    <th className="text-center py-6 px-6 font-bold text-gray-400">Starter</th>
-                                    <th className="text-center py-6 px-6 font-bold text-violet-500 bg-white/5 rounded-t-2xl">Professional</th>
-                                    <th className="text-center py-6 px-6 font-bold text-gray-400">Enterprise</th>
+                                <tr style={{ borderBottom: '1px solid var(--line)' }}>
+                                    <th style={{ textAlign: 'left', padding: '16px 20px', fontSize: '12px', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', color: 'var(--amp-muted)', fontWeight: 500 }}>Feature</th>
+                                    <th style={{ textAlign: 'center', padding: '16px 20px', fontSize: '12px', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', color: 'var(--amp-muted)', fontWeight: 500 }}>Starter</th>
+                                    <th style={{ textAlign: 'center', padding: '16px 20px', fontSize: '12px', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', color: 'var(--amp-primary)', fontWeight: 700, background: 'rgba(99,102,241,0.04)' }}>Professional</th>
+                                    <th style={{ textAlign: 'center', padding: '16px 20px', fontSize: '12px', fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', color: 'var(--amp-muted)', fontWeight: 500 }}>Enterprise</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-white/5">
-                                {[
-                                    { feature: 'AI Chatbot', starter: true, pro: true, enterprise: true },
-                                    { feature: 'AI Voice', starter: false, pro: true, enterprise: true },
-                                    { feature: 'Google Business', starter: true, pro: true, enterprise: true },
-                                    { feature: 'Review Response', starter: true, pro: true, enterprise: true },
-                                    { feature: 'Email Automation', starter: false, pro: true, enterprise: true },
-                                    { feature: 'Social Media', starter: false, pro: true, enterprise: true },
-                                    { feature: 'Ad Copy', starter: false, pro: true, enterprise: true },
-                                    { feature: 'SEO Content', starter: false, pro: false, enterprise: '4/mo' },
-                                    { feature: 'Landing Pages', starter: false, pro: false, enterprise: '2/mo' },
-                                    { feature: 'Automated Sales Funnels', starter: false, pro: false, enterprise: true },
-                                    { feature: 'Custom Integrations', starter: false, pro: true, enterprise: true },
-                                    { feature: 'Support Response Time', starter: '48hr', pro: '24hr', enterprise: 'Same day' },
-                                    { feature: 'Strategy Calls', starter: false, pro: 'Weekly', enterprise: '2x/week' },
-                                    { feature: 'Dedicated Manager', starter: false, pro: false, enterprise: true },
-                                    { feature: 'Customization', starter: 'Standard', pro: 'Full', enterprise: 'Unlimited' },
-                                ].map((row, idx) => (
-                                    <tr key={idx} className="hover:bg-white/5 transition-colors">
-                                        <td className="py-4 px-6 text-gray-300 text-sm font-medium">{row.feature}</td>
-                                        <td className="text-center py-4 px-6">
+                            <tbody>
+                                {tableRows.map((row, idx) => (
+                                    <tr key={idx} style={{ borderBottom: '1px solid var(--line)' }}>
+                                        <td style={{ padding: '12px 20px', fontSize: '13px', color: 'var(--amp-text)' }}>{row.feature}</td>
+                                        <td style={{ textAlign: 'center', padding: '12px 20px' }}>
                                             {typeof row.starter === 'boolean' ? (
                                                 row.starter ? <CheckIcon /> : <XIcon />
-                                            ) : <span className="text-gray-400 font-semibold text-xs">{row.starter}</span>}
+                                            ) : <span style={{ fontSize: '12px', fontFamily: 'var(--font-mono)', color: 'var(--amp-muted)' }}>{row.starter}</span>}
                                         </td>
-                                        <td className="text-center py-4 px-6 bg-white/5">
+                                        <td style={{ textAlign: 'center', padding: '12px 20px', background: 'rgba(99,102,241,0.02)' }}>
                                             {typeof row.pro === 'boolean' ? (
                                                 row.pro ? <CheckIcon /> : <XIcon />
-                                            ) : <span className="text-violet-500 font-bold text-xs">{row.pro}</span>}
+                                            ) : <span style={{ fontSize: '12px', fontFamily: 'var(--font-mono)', color: 'var(--amp-primary)', fontWeight: 700 }}>{row.pro}</span>}
                                         </td>
-                                        <td className="text-center py-4 px-6">
+                                        <td style={{ textAlign: 'center', padding: '12px 20px' }}>
                                             {typeof row.enterprise === 'boolean' ? (
                                                 row.enterprise ? <CheckIcon /> : <XIcon />
-                                            ) : <span className="text-gray-400 font-semibold text-xs">{row.enterprise}</span>}
+                                            ) : <span style={{ fontSize: '12px', fontFamily: 'var(--font-mono)', color: 'var(--amp-muted)' }}>{row.enterprise}</span>}
                                         </td>
                                     </tr>
                                 ))}
@@ -272,64 +294,58 @@ export default function PricingClient() {
                 </div>
             </section>
 
-            <section className="py-24">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Questions People Usually Ask</h2>
-                        <p className="text-gray-400">Answers to the most common questions</p>
+            <section className="section tight section-rule">
+                <div className="shell">
+                    <span className="section-counter">04 / 04</span>
+                    <div className="section-head" data-reveal>
+                        <div className="eyebrow">straight answers</div>
+                        <h2>Questions People<br />Usually Ask.</h2>
                     </div>
-                    <div className="max-w-3xl mx-auto space-y-4">
+                    <div className="faqs" data-reveal>
                         {faqs.map((faq, idx) => (
-                            <div key={idx} className="bg-white/5 rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all backdrop-blur-sm">
-                                <h3 className="text-lg font-bold text-white mb-3">{faq.question}</h3>
-                                <p className="text-gray-400 leading-relaxed">{faq.answer}</p>
+                            <div className="faq" key={idx}>
+                                <div className="num">{String(idx + 1).padStart(2, '0')}</div>
+                                <div>
+                                    <div className="q">{faq.question}</div>
+                                    <p className="a">{faq.answer}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    <div className="bg-gradient-to-r from-indigo-500 to-violet-500 rounded-[3rem] p-12 text-center shadow-2xl relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
-                        <div className="relative z-10">
-                            <h2 className="text-3xl md:text-5xl font-black text-white mb-6">
-                                Want to See If This Actually Works?
-                            </h2>
-                            <p className="text-indigo-100 text-xl mb-10 max-w-2xl mx-auto">
-                                7 days free. No card required. Walk away anytime if it's not your thing.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                                <Link href="/contact" className="bg-white text-black px-10 py-5 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all">
-                                    Start 7-Day Free Trial
-                                </Link>
-                                <Link href="/contact" className="bg-indigo-900/30 backdrop-blur text-white px-10 py-5 rounded-full font-bold text-lg border border-white/20 hover:bg-indigo-900/50 transition-all">
-                                    Book Free Consultation
-                                </Link>
-                            </div>
-                        </div>
+            <section className="closing">
+                <div className="shell">
+                    <div className="section-head" data-reveal>
+                        <div className="eyebrow">→ want to see if this actually works?</div>
+                        <h2>7 Days Free.<br />No Card Required.</h2>
+                        <p className="lede">7 days free. No card required. Walk away anytime if it&apos;s not your thing.</p>
+                    </div>
+                    <div className="closing-actions" data-reveal>
+                        <Link href="/contact" className="btn btn-primary">→ Start Free Trial</Link>
+                        <Link href="/contact" className="btn btn-ghost">← Book a Consultation</Link>
                     </div>
                 </div>
             </section>
 
             <Footer />
-        </main>
+        </>
     );
 }
 
 function CheckIcon() {
     return (
-        <svg className="w-6 h-6 text-emerald-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amp-primary)" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block' }}>
+            <path d="M5 13l4 4L19 7" />
         </svg>
     );
 }
 
 function XIcon() {
     return (
-        <svg className="w-6 h-6 text-gray-300 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--line-strong)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block' }}>
+            <path d="M6 18L18 6M6 6l12 12" />
         </svg>
     );
 }

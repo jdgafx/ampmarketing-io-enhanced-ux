@@ -8,104 +8,110 @@ export const metadata = {
   keywords: ["AI chatbot for business", "website chatbot service", "lead capture chatbot", "automated appointment booking chatbot", "24/7 AI chatbot", "AI lead qualification", "chatbot for small business", "best business chatbot 2025", "AI customer service chatbot", "chatbot lead generation", "website visitor engagement bot", "conversational AI for business", "chatbot setup service", "AI chatbot agency"],
 };
 
+const faqs = [
+  { q: "How does the free trial work?", a: "You get full access for 7 days, no credit card required. See how many leads the chatbot captures for you. If it's not a fit, walk away. Zero risk." },
+  { q: "How is the AI trained?", a: "We feed it your website content, PDFs, and documents. The bot absorbs all of it and gives answers specific to your business, not generic filler." },
+  { q: "Does it work with my calendar?", a: "Yes. Google Calendar, Outlook, and most other platforms. It checks your availability in real time and only books open slots. We handle the entire setup for you." },
+  { q: "What if it doesn't know an answer?", a: "It lets the visitor know someone will follow up, then immediately alerts your team via email or text. You take it from there and close the deal." },
+];
+
 export default function AiChatbotPage() {
   return (
-    <main className="min-h-screen bg-transparent font-poppins text-gray-200">
+    <>
       <Navbar />
 
-      <section className="bg-transparent text-white py-24 pt-32">
-        <div className="container mx-auto px-4 text-center">
-          <div className="text-6xl mb-6">🤖</div>
-          <h1 className="text-4xl md:text-6xl font-black mb-6">Smart Website Chat</h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Your website should do more than sit there looking pretty. If it's not engaging visitors, qualifying leads, and booking appointments while you sleep, it's costing you money. Our AI chatbots are trained on your business and guide visitors from casual browsing to a booked appointment.
+      <header className="svc-hero">
+        <div className="shell">
+          <div className="shape-meta fade-up">
+            <span className="num">SHAPE · 05</span>
+            <span className="bul">·</span>
+            <span>ai-chatbot</span>
+            <span className="bul">·</span>
+            <span>ai-native</span>
+          </div>
+          <h1 className="fade-up" style={{ animationDelay: '0.05s' }}>
+            Smart Website<br />
+            <em>Chat.</em>
+          </h1>
+          <p className="lede fade-up" style={{ animationDelay: '0.1s' }}>
+            Your website should do more than sit there looking pretty. If it&apos;s not engaging visitors, qualifying leads, and booking appointments while you sleep, it&apos;s costing you money. Our AI chatbots are trained on your business and guide visitors from casual browsing to a booked appointment.
           </p>
+          <dl className="svc-meta-dl fade-up" style={{ animationDelay: '0.18s' }}>
+            <div><dt>ship</dt><dd>7 days</dd></div>
+            <div><dt>best for</dt><dd>lead capture</dd></div>
+            <div><dt>engine</dt><dd>qualify · book · learn</dd></div>
+            <div><dt>handoff</dt><dd>system · access · reporting</dd></div>
+          </dl>
         </div>
-      </section>
+      </header>
 
-      <section className="py-20 bg-transparent">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="section tight section-rule">
+        <div className="shell">
+          <span className="section-counter">01 / 03</span>
+          <div className="section-head" data-reveal>
+            <div className="eyebrow">the spec / what we actually ship</div>
+            <h2>Ways Your Business<br />Benefits.</h2>
+          </div>
+          <div className="two-col" data-reveal>
             <div>
-              <h2 className="text-3xl font-bold text-white mb-6">Ways Your Business Benefits</h2>
-              <p className="text-gray-400 mb-6">
-                Most chatbots on the market are worthless. We do things differently. We train yours on your business files, docs, and PDFs so it sounds like you, not some generic script. This AI doesn't need breaks. It works your schedule, which is 24/7.
-              </p>
-              <ul className="space-y-4">
-            {[
-              "Trained on your website, docs, and PDFs so it understands your business inside and out.",
-              "Qualifies every lead before booking, so you only meet with people who are ready to buy.",
-              "Syncs with your calendar to prevent double-bookings. Works with Google, Outlook, and more.",
-              "Responds instantly at 2 AM, on weekends, and on holidays. Your leads never wait.",
-              "Conversations feel natural and personal, tailored to each visitor's questions and needs.",
-              "Gets smarter over time by learning from every interaction.",
-            ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <svg className="w-6 h-6 text-blue-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-gray-300">{item}</span>
-                  </li>
-                ))}
+              <p className="lede" style={{ marginBottom: '28px' }}>Most chatbots on the market are worthless. We do things differently. We train yours on your business files, docs, and PDFs so it sounds like you, not some generic script. This AI doesn&apos;t need breaks. It works your schedule, which is 24/7.</p>
+              <ul className="checklist">
+                <li>Trained on your website, docs, and PDFs so it understands your business inside and out.</li>
+                <li>Qualifies every lead before booking, so you only meet with people who are ready to buy.</li>
+                <li>Syncs with your calendar to prevent double-bookings. Works with Google, Outlook, and more.</li>
+                <li>Responds instantly at 2 AM, on weekends, and on holidays. Your leads never wait.</li>
+                <li>Conversations feel natural and personal, tailored to each visitor&apos;s questions and needs.</li>
+                <li>Gets smarter over time by learning from every interaction.</li>
               </ul>
             </div>
-            <div className="bg-white/5 rounded-2xl p-8 border border-white/10 backdrop-blur-sm">
-              <h3 className="text-2xl font-bold text-white mb-4">Pricing</h3>
-              <div className="text-4xl font-black text-blue-500 mb-2">Starting at $497 setup + $149/mo</div>
-              <p className="text-gray-400 mb-6">Custom training and monthly AI management.</p>
-              <Link href="/contact" className="block w-full bg-indigo-600 text-white text-center py-4 rounded-xl font-bold hover:bg-indigo-700 transition-colors">
-                Start 7-Day Free Trial
-              </Link>
-              <p className="text-xs text-gray-500 mt-4 text-center">
-                Try it on your site. Only pay if you see results.
-              </p>
-            </div>
+            <aside className="price-card">
+              <div className="label">pricing · transparent</div>
+              <div className="price"><em>$497</em> setup<br />+ <em>$149</em>/mo</div>
+              <div className="sub">Custom training and monthly AI management.</div>
+              <Link href="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>→ get started</Link>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--amp-muted)', textAlign: 'center', marginTop: '18px', letterSpacing: '0.04em' }}>try it on your site. only pay if you see results.</p>
+            </aside>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-black/20">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h2>
-          {[
-            {
-              q: "How does the free trial work?",
-              a: "You get full access for 7 days, no credit card required. See how many leads the chatbot captures for you. If it's not a fit, walk away. Zero risk."
-            },
-            {
-              q: "How is the AI trained?",
-              a: "We feed it your website content, PDFs, and documents. The bot absorbs all of it and gives answers specific to your business, not generic filler."
-            },
-            {
-              q: "Does it work with my calendar?",
-              a: "Yes. Google Calendar, Outlook, and most other platforms. It checks your availability in real time and only books open slots. We handle the entire setup for you."
-            },
-            {
-              q: "What if it doesn't know an answer?",
-              a: "It lets the visitor know someone will follow up, then immediately alerts your team via email or text. You take it from there and close the deal."
-            },
-          ].map((faq, idx) => (
-            <div key={idx} className="bg-white/5 rounded-xl p-6 mb-4 border border-white/10 backdrop-blur-sm">
-              <h3 className="font-bold text-white mb-2">{faq.q}</h3>
-              <p className="text-gray-400">{faq.a}</p>
-            </div>
-          ))}
+      <section className="section tight section-rule">
+        <div className="shell">
+          <span className="section-counter">02 / 03</span>
+          <div className="section-head" data-reveal>
+            <div className="eyebrow">straight answers</div>
+            <h2>Frequently Asked<br />Questions.</h2>
+          </div>
+          <div className="faqs" data-reveal>
+            {faqs.map((faq, idx) => (
+              <div className="faq" key={idx}>
+                <div className="num">{String(idx + 1).padStart(2, '0')}</div>
+                <div>
+                  <div className="q">{faq.q}</div>
+                  <p className="a">{faq.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="py-24 bg-gradient-to-r from-indigo-500 to-violet-500">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">Your next customer is on your website right now.</h2>
-          <p className="text-indigo-100 mb-8 max-w-2xl mx-auto">
-            Give it 7 days. If you're not getting more qualified leads, cancel and pay nothing.
-          </p>
-          <Link href="/contact" className="inline-block bg-white text-black px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all">
-            Start Free Trial
-          </Link>
+      <section className="closing">
+        <div className="shell">
+          <span className="section-counter">03 / 03</span>
+          <div className="section-head" data-reveal>
+            <div className="eyebrow">→ your next customer is on your website right now</div>
+            <h2>Never Miss<br />Another Lead.</h2>
+            <p className="lede">Give it 7 days. If you&apos;re not getting more qualified leads, cancel and pay nothing.</p>
+          </div>
+          <div className="closing-actions" data-reveal>
+            <Link href="/contact" className="btn btn-primary">→ start free trial</Link>
+            <Link href="/services" className="btn btn-ghost">← all services</Link>
+          </div>
         </div>
       </section>
 
       <Footer />
-    </main>
+    </>
   );
 }

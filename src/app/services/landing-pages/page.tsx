@@ -8,82 +8,110 @@ export const metadata = {
   keywords: ["landing page design service", "high-converting landing pages", "lead capture page design", "landing page agency", "conversion rate optimization", "mobile-optimized landing pages", "custom landing page builder", "landing page for lead generation", "fast loading landing pages", "A/B tested landing pages", "landing page copywriting", "best landing page agency 2025", "PPC landing page design", "Bing Ads landing pages"],
 };
 
+const faqs = [
+  { q: "Where will the pages actually be?", a: "We can either put it on your existing website or create a new one for you. It'll work whichever way you choose." },
+  { q: "Can you integrate with my CRM?", a: "Of course, we can feed the leads directly into HubSpot, Salesforce, Mailchimp—the CRM of your choice. No hassles." },
+  { q: "What if I want changes after some time?", a: "We cover the first 30 days of tweaks, and after that, we are always available if you need further updates." },
+  { q: "How many conversions do you think I will get?", a: "Results depend on your product and your traffic. We build the conversion mechanism—you bring the audience." },
+];
+
 export default function LandingPagesPage() {
   return (
-    <main className="min-h-screen bg-transparent font-poppins text-gray-200">
+    <>
       <Navbar />
-      <section className="bg-transparent text-white py-24 pt-32">
-        <div className="container mx-auto px-4 text-center">
-          <div className="text-6xl mb-6">🎯</div>
-          <h1 className="text-4xl md:text-6xl font-black mb-6">High-Converting Pages</h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+
+      <header className="svc-hero">
+        <div className="shell">
+          <div className="shape-meta fade-up">
+            <span className="num">SHAPE · 04</span>
+            <span className="bul">·</span>
+            <span>landing-pages</span>
+            <span className="bul">·</span>
+            <span>conversion-first</span>
+          </div>
+          <h1 className="fade-up" style={{ animationDelay: '0.05s' }}>
+            High-Converting<br />
+            <em>Pages.</em>
+          </h1>
+          <p className="lede fade-up" style={{ animationDelay: '0.1s' }}>
             Only one page needed to turn visitors into leads. We come up with the text, the design, and ensure that the &quot;Buy&quot; button is 100% functional. You get an elegant website that loads fast and is a great source of income for you.
           </p>
+          <dl className="svc-meta-dl fade-up" style={{ animationDelay: '0.18s' }}>
+            <div><dt>ship</dt><dd>5 days</dd></div>
+            <div><dt>best for</dt><dd>lead capture</dd></div>
+            <div><dt>engine</dt><dd>design · copy · launch</dd></div>
+            <div><dt>handoff</dt><dd>page · analytics · revisions</dd></div>
+          </dl>
         </div>
-      </section>
-      <section className="py-20 bg-transparent">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      </header>
+
+      <section className="section tight section-rule">
+        <div className="shell">
+          <span className="section-counter">01 / 03</span>
+          <div className="section-head" data-reveal>
+            <div className="eyebrow">the spec / what we actually ship</div>
+            <h2>What Makes a Page<br />Actually Convert.</h2>
+          </div>
+          <div className="two-col" data-reveal>
             <div>
-              <p className="text-gray-400 mb-4">Here is the straightforward comparison between an attractive page and one that generates sales:</p>
-              <ul className="space-y-4">
-                {[
-                  "Flawless on mobile\u2014where over 70% of your visitors are browsing.",
-                  "Lightning-fast load times under 3 seconds. Anything slower and visitors leave.",
-                  "Headlines that stop the scroll.",
-                  "Trust is instantly established when we combine your glowing testimonials and client logos\u2014because people buy from people they trust.",
-                  "Prominent and obvious buttons. We don\u2019t make it difficult to check out.",
-                  "We set up proper analytics so you always know where the money is coming from.",
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <svg className="w-6 h-6 text-blue-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-gray-300">{item}</span>
-                  </li>
-                ))}
+              <p className="lede" style={{ marginBottom: '28px' }}>Here is the straightforward comparison between an attractive page and one that generates sales:</p>
+              <ul className="checklist">
+                <li>Flawless on mobile—where over 70% of your visitors are browsing.</li>
+                <li>Lightning-fast load times under 3 seconds. Anything slower and visitors leave.</li>
+                <li>Headlines that stop the scroll.</li>
+                <li>Trust is instantly established when we combine your glowing testimonials and client logos—because people buy from people they trust.</li>
+                <li>Prominent and obvious buttons. We don&apos;t make it difficult to check out.</li>
+                <li>We set up proper analytics so you always know where the money is coming from.</li>
               </ul>
             </div>
-            <div className="bg-white/5 rounded-2xl p-8 border border-white/10 backdrop-blur-sm">
-              <h3 className="text-2xl font-bold text-white mb-4">Pricing</h3>
-              <div className="text-5xl font-black text-blue-500 mb-2">Starting at $799<span className="text-xl text-gray-500">/page</span></div>
-              <p className="text-sm text-gray-500 mb-2">One-time fee per page</p>
-              <p className="text-gray-400 mb-6">You are free to revise the content two times.</p>
-              <Link href="/contact" className="block w-full bg-indigo-600 text-white text-center py-4 rounded-xl font-bold hover:bg-indigo-700 transition-colors">
-                Order Landing Page
-              </Link>
-            </div>
+            <aside className="price-card">
+              <div className="label">pricing · transparent</div>
+              <div className="price">from <em>$799</em>/page</div>
+              <div className="sub">One-time fee per page. You are free to revise the content two times.</div>
+              <Link href="/contact" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>→ order landing page</Link>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--amp-muted)', textAlign: 'center', marginTop: '18px', letterSpacing: '0.04em' }}>one-time fee per page.</p>
+            </aside>
           </div>
         </div>
       </section>
-      <section className="py-20 bg-black/20">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">Things You May Be Wondering About</h2>
-          {[
-            { q: "Where will the pages actually be?", a: "We can either put it on your existing website or create a new one for you. It'll work whichever way you choose." },
-            { q: "Can you integrate with my CRM?", a: "Of course, we can feed the leads directly into HubSpot, Salesforce, Mailchimp\u2014the CRM of your choice. No hassles." },
-            { q: "What if I want changes after some time?", a: "We cover the first 30 days of tweaks, and after that, we are always available if you need further updates." },
-            { q: "How many conversions do you think I will get?", a: "Results depend on your product and your traffic. We build the conversion mechanism\u2014you bring the audience." },
-          ].map((faq, idx) => (
-            <div key={idx} className="bg-white/5 rounded-xl p-6 mb-4 border border-white/10 backdrop-blur-sm">
-              <h3 className="font-bold text-white mb-2">{faq.q}</h3>
-              <p className="text-gray-400">{faq.a}</p>
-            </div>
-          ))}
+
+      <section className="section tight section-rule">
+        <div className="shell">
+          <span className="section-counter">02 / 03</span>
+          <div className="section-head" data-reveal>
+            <div className="eyebrow">straight answers</div>
+            <h2>Things You May Be<br />Wondering About.</h2>
+          </div>
+          <div className="faqs" data-reveal>
+            {faqs.map((faq, idx) => (
+              <div className="faq" key={idx}>
+                <div className="num">{String(idx + 1).padStart(2, '0')}</div>
+                <div>
+                  <div className="q">{faq.q}</div>
+                  <p className="a">{faq.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-      <section className="py-24 bg-gradient-to-r from-indigo-500 to-violet-500">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">The landing page you&apos;ve been procrastinating about.</h2>
-          <p className="text-indigo-100 mb-8 max-w-2xl mx-auto">
-            One e-commerce brand reported that a single landing page generated $47,000 in its first month. They had been putting it off for nearly two years.
-          </p>
-          <Link href="/contact" className="inline-block bg-white text-black px-10 py-4 rounded-full font-bold text-lg shadow-xl">
-            Build My Page
-          </Link>
+
+      <section className="closing">
+        <div className="shell">
+          <span className="section-counter">03 / 03</span>
+          <div className="section-head" data-reveal>
+            <div className="eyebrow">→ the landing page you&apos;ve been procrastinating about</div>
+            <h2>Stop Putting It<br />Off.</h2>
+            <p className="lede">One e-commerce brand reported that a single landing page generated $47,000 in its first month. They had been putting it off for nearly two years.</p>
+          </div>
+          <div className="closing-actions" data-reveal>
+            <Link href="/contact" className="btn btn-primary">→ build my page</Link>
+            <Link href="/services" className="btn btn-ghost">← all services</Link>
+          </div>
         </div>
       </section>
+
       <Footer />
-    </main>
+    </>
   );
 }

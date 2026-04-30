@@ -1,4 +1,5 @@
-import { Navbar, Footer } from '@/components/Layout';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPost, getPosts, urlFor } from '@/sanity/lib/client';
@@ -6,7 +7,7 @@ import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 
-const SITE_URL = 'https://melodic-flow-enhanced-ux.netlify.app';
+const SITE_URL = 'https://ampmarketing-io-enhanced-ux.netlify.app';
 const SITE_NAME = 'AMP Marketing';
 const ORG_LOGO = `${SITE_URL}/logo.png`;
 
@@ -53,6 +54,7 @@ type PostShape = {
   faqs?: Faq[];
   aiAudit?: { score?: number; status?: string; lastChecked?: string };
   relatedServices?: RelatedService[];
+  gallery?: Array<{ asset: { _ref?: string }; alt: string; caption?: string }>;
 };
 
 export async function generateStaticParams() {
@@ -124,53 +126,52 @@ export async function generateMetadata({
 const portableTextComponents = {
   types: {
     image: ({ value }: { value: PortableImage }) => (
-      <div className="my-8 rounded-lg overflow-hidden">
+      <div style={{ margin: '2rem 0', overflow: 'hidden', border: '1px solid var(--line)' }}>
         <Image
           src={urlFor(value).width(800).url()}
           alt={value.alt || 'Blog image'}
           width={800}
           height={400}
-          className="w-full"
+          style={{ width: '100%', height: 'auto', display: 'block' }}
         />
       </div>
     ),
   },
   block: {
     h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="text-2xl font-bold text-white mt-12 mb-6">{children}</h2>
+      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 700, color: 'var(--amp-text)', marginTop: '3rem', marginBottom: '1.25rem', lineHeight: 1.2 }}>{children}</h2>
     ),
     h3: ({ children }: { children?: React.ReactNode }) => (
-      <h3 className="text-xl font-bold text-white mt-8 mb-4">{children}</h3>
+      <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--amp-text)', marginTop: '2rem', marginBottom: '0.75rem', lineHeight: 1.3 }}>{children}</h3>
     ),
     normal: ({ children }: { children?: React.ReactNode }) => (
-      <p className="text-gray-300 leading-relaxed mb-6">{children}</p>
+      <p style={{ color: 'var(--amp-muted)', lineHeight: 1.8, marginBottom: '1.5rem', fontSize: '15px' }}>{children}</p>
     ),
     blockquote: ({ children }: { children?: React.ReactNode }) => (
-      <blockquote className="bg-white/5 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg text-gray-300 backdrop-blur-sm">
+      <blockquote style={{ borderLeft: '2px solid var(--amp-primary)', paddingLeft: '1.5rem', margin: '2rem 0', color: 'var(--amp-muted)', fontStyle: 'italic', fontSize: '16px' }}>
         {children}
       </blockquote>
     ),
   },
   list: {
     bullet: ({ children }: { children?: React.ReactNode }) => (
-      <ul className="list-disc pl-6 space-y-2 text-gray-300 mb-8">
+      <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem', color: 'var(--amp-muted)', lineHeight: 1.8, listStyleType: 'disc' }}>
         {children}
       </ul>
     ),
     number: ({ children }: { children?: React.ReactNode }) => (
-      <ol className="list-decimal pl-6 space-y-2 text-gray-300 mb-8">
+      <ol style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem', color: 'var(--amp-muted)', lineHeight: 1.8, listStyleType: 'decimal' }}>
         {children}
       </ol>
     ),
   },
   marks: {
     strong: ({ children }: { children?: React.ReactNode }) => (
-      <strong className="font-bold">{children}</strong>
+      <strong style={{ fontWeight: 700, color: 'var(--amp-text)' }}>{children}</strong>
     ),
     em: ({ children }: { children?: React.ReactNode }) => (
-      <em className="italic">{children}</em>
+      <em style={{ fontStyle: 'italic' }}>{children}</em>
     ),
-    // External links open in a new tab and pass nofollow.
     link: ({
       value,
       children,
@@ -180,16 +181,13 @@ const portableTextComponents = {
     }) => (
       <a
         href={value?.href}
-        className="text-blue-500 hover:underline"
+        style={{ color: 'var(--amp-primary)', textDecoration: 'underline', textUnderlineOffset: '3px' }}
         target="_blank"
         rel="noopener noreferrer"
       >
         {children}
       </a>
     ),
-    // Internal links use Next.js Link so link equity flows through and the
-    // user stays in the same tab. The custom mark is configured in
-    // src/sanity/schemas/post.ts.
     internalLink: ({
       value,
       children,
@@ -199,7 +197,7 @@ const portableTextComponents = {
     }) => (
       <Link
         href={value?.path || '#'}
-        className="text-blue-500 hover:underline font-medium"
+        style={{ color: 'var(--amp-primary)', textDecoration: 'underline', textUnderlineOffset: '3px', fontWeight: 500 }}
       >
         {children}
       </Link>
@@ -289,10 +287,9 @@ export default async function BlogPostPage({
   const jsonLd = buildJsonLd(post);
 
   return (
-    <main className="min-h-screen bg-transparent font-poppins text-gray-200">
+    <>
       <Navbar />
 
-      {/* JSON-LD: Article + BreadcrumbList + (optional) FAQPage */}
       {jsonLd.map((blob, i) => (
         <script
           key={i}
@@ -302,85 +299,117 @@ export default async function BlogPostPage({
       ))}
 
       <article>
-        <section className="bg-transparent py-20 pt-32">
-          <div className="container mx-auto px-4 max-w-4xl">
+        <header className="svc-hero" style={{ paddingBottom: '0' }}>
+          <div className="shell">
             <Link
               href="/blog"
-              className="text-blue-500 font-bold text-sm uppercase tracking-widest hover:underline mb-6 inline-block"
+              style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.08em', color: 'var(--amp-primary)', textTransform: 'uppercase', textDecoration: 'none', display: 'inline-block', marginBottom: '24px' }}
             >
               ← Back to Blog
             </Link>
             {post.category?.title && (
-              <div className="text-blue-500 text-xs font-bold uppercase tracking-widest mb-4">
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.1em', color: 'var(--amp-primary)', textTransform: 'uppercase', marginBottom: '16px' }}>
                 {post.category.title}
               </div>
             )}
-            <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+            <h1 className="fade-up" style={{ animationDelay: '0.05s' }}>
               {post.title}
             </h1>
-            <div className="flex items-center gap-6 text-gray-400 text-sm">
+            <div className="fade-up" style={{ animationDelay: '0.1s', display: 'flex', alignItems: 'center', gap: '24px', marginTop: '16px' }}>
               {post.publishedAt && (
-                <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--amp-muted)', letterSpacing: '0.04em' }}>{new Date(post.publishedAt).toLocaleDateString()}</span>
               )}
-              {post.readTime && <span>{post.readTime} min read</span>}
-              {post.author?.name && <span>{post.author.name}</span>}
+              {post.readTime && (
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--amp-muted)', letterSpacing: '0.04em' }}>{post.readTime} min read</span>
+              )}
+              {post.author?.name && (
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--amp-muted)', letterSpacing: '0.04em' }}>{post.author.name}</span>
+              )}
             </div>
           </div>
-        </section>
+        </header>
 
-        {post.mainImage && (
-          <section className="py-8">
-            <div className="container mx-auto px-4 max-w-4xl">
-              <div className="rounded-xl overflow-hidden">
+        <section style={{ padding: '0 0 var(--space-8)' }}>
+          <div className="shell" style={{ paddingTop: 'var(--space-8)' }}>
+            <div style={{ overflow: 'hidden', border: '1px solid var(--line)' }}>
+              {post.mainImage ? (
                 <Image
                   src={urlFor(post.mainImage).width(1200).height(600).url()}
                   alt={post.title}
                   width={1200}
                   height={600}
-                  className="w-full"
+                  style={{ width: '100%', height: 'auto', display: 'block' }}
                 />
-              </div>
-            </div>
-          </section>
-        )}
-
-        <section className="py-16">
-          <div className="container mx-auto px-4 max-w-3xl">
-            <div className="prose prose-lg prose-invert max-w-none">
-              {post.excerpt && (
-                <p className="text-xl text-gray-300 leading-relaxed mb-8 font-medium">
-                  {post.excerpt}
-                </p>
-              )}
-              {post.body && (
-                <PortableText
-                  value={post.body as never}
-                  components={portableTextComponents}
+              ) : (
+                <Image
+                  src="https://images.unsplash.com/photo-1542744095-0d53267d353e?w=1200&h=600&fit=crop&auto=format&q=75"
+                  alt={post.title}
+                  width={1200}
+                  height={600}
+                  style={{ width: '100%', height: 'auto', display: 'block' }}
                 />
               )}
             </div>
           </div>
         </section>
 
+        <section style={{ padding: 'var(--space-8) 0' }}>
+          <div className="shell" style={{ maxWidth: '780px' }}>
+            {post.excerpt && (
+              <p style={{ fontSize: '18px', color: 'var(--amp-text)', lineHeight: 1.75, marginBottom: '2rem', fontWeight: 500, borderLeft: '2px solid var(--amp-primary)', paddingLeft: '1.5rem' }}>
+                {post.excerpt}
+              </p>
+            )}
+            {post.body && (
+              <PortableText
+                value={post.body as never}
+                components={portableTextComponents}
+              />
+            )}
+          </div>
+        </section>
+
+        {post.gallery && post.gallery.length > 0 && (
+          <section style={{ padding: 'var(--space-8) 0', borderTop: '1px solid var(--line)' }}>
+            <div className="shell">
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 700, color: 'var(--amp-text)', marginBottom: '2rem' }}>Gallery</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: '16px' }}>
+                {post.gallery.map((img, i) => (
+                  <figure key={i} style={{ margin: 0, overflow: 'hidden', border: '1px solid var(--line)' }}>
+                    <Image
+                      src={urlFor(img).width(800).height(600).url()}
+                      alt={img.alt || 'Gallery image'}
+                      width={800}
+                      height={600}
+                      style={{ width: '100%', height: 'auto', display: 'block' }}
+                    />
+                    {img.caption && (
+                      <figcaption style={{ padding: '12px 16px', fontSize: '12px', color: 'var(--amp-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.03em' }}>
+                        {img.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {post.faqs && post.faqs.length > 0 && (
-          <section className="py-16">
-            <div className="container mx-auto px-4 max-w-3xl">
-              <h2 className="text-3xl font-extrabold text-white mb-8">
+          <section style={{ padding: 'var(--space-8) 0', borderTop: '1px solid var(--line)' }}>
+            <div className="shell" style={{ maxWidth: '780px' }}>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 700, color: 'var(--amp-text)', marginBottom: '2rem' }}>
                 Frequently Asked Questions
               </h2>
-              <div className="space-y-4">
+              <div className="faqs">
                 {post.faqs.map((faq, i) => (
-                  <details
-                    key={i}
-                    className="bg-white/5 rounded-lg p-6 border border-white/10 backdrop-blur-sm"
-                  >
-                    <summary className="font-bold text-lg text-white cursor-pointer">
-                      {faq.question}
-                    </summary>
-                    <p className="mt-4 text-gray-300 leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </details>
+                  <div className="faq" key={i}>
+                    <div className="num">{String(i + 1).padStart(2, '0')}</div>
+                    <div>
+                      <div className="q">{faq.question}</div>
+                      <p className="a">{faq.answer}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -388,28 +417,28 @@ export default async function BlogPostPage({
         )}
 
         {post.relatedServices && post.relatedServices.length > 0 && (
-          <section className="py-16">
-            <div className="container mx-auto px-4 max-w-4xl">
-              <h2 className="text-2xl font-extrabold text-white mb-8">
+          <section style={{ padding: 'var(--space-8) 0', borderTop: '1px solid var(--line)' }}>
+            <div className="shell">
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 700, color: 'var(--amp-text)', marginBottom: '2rem' }}>
                 Related Services
               </h2>
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
                 {post.relatedServices.map((s) => (
                   <Link
                     key={s._id}
                     href={s.path}
-                    className="block p-6 border border-white/10 rounded-xl bg-white/5 hover:border-blue-500 hover:bg-white/10 transition-all group backdrop-blur-sm"
+                    style={{ display: 'block', padding: '24px', border: '1px solid var(--line)', textDecoration: 'none', transition: 'border-color 0.2s' }}
                   >
-                    {s.icon && <div className="text-3xl mb-3">{s.icon}</div>}
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-500">
+                    {s.icon && <div style={{ fontSize: '28px', marginBottom: '12px' }}>{s.icon}</div>}
+                    <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 700, color: 'var(--amp-text)', marginBottom: '8px' }}>
                       {s.title}
                     </h3>
                     {s.shortDescription && (
-                      <p className="text-gray-400 text-sm">
+                      <p style={{ fontSize: '13px', color: 'var(--amp-muted)', lineHeight: 1.5, marginBottom: '12px' }}>
                         {s.shortDescription}
                       </p>
                     )}
-                    <span className="text-blue-500 font-bold text-sm uppercase tracking-widest mt-3 inline-block">
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--amp-primary)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
                       Learn more →
                     </span>
                   </Link>
@@ -420,24 +449,21 @@ export default async function BlogPostPage({
         )}
       </article>
 
-      <section className="bg-gradient-to-r from-indigo-500 to-violet-500 py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-black text-white mb-6">
-            Ready to get results?
-          </h2>
-          <p className="text-indigo-100 text-xl mb-8 max-w-2xl mx-auto">
-            Let&apos;s help you implement AI-powered marketing that actually works.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block bg-white text-black px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1"
-          >
-            Book a Free Call
-          </Link>
+      <section className="closing">
+        <div className="shell">
+          <div className="section-head" data-reveal>
+            <div className="eyebrow">→ ready to get results?</div>
+            <h2>Let&apos;s Put AI<br />to Work for You.</h2>
+            <p className="lede">Let&apos;s help you implement AI-powered marketing that actually works.</p>
+          </div>
+          <div className="closing-actions" data-reveal>
+            <Link href="/contact" className="btn btn-primary">→ Book a Free Call</Link>
+            <Link href="/blog" className="btn btn-ghost">← Back to Blog</Link>
+          </div>
         </div>
       </section>
 
       <Footer />
-    </main>
+    </>
   );
 }

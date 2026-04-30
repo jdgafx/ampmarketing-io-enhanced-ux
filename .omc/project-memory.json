@@ -1,0 +1,263 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1777500265124,
+  "projectRoot": "/home/chris/dev/CUSTOMER_PROJECTS/convertiq.com/ampmarketing.io-enhanced-ux-new",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "16.1.5",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "19.2.3",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.2.3",
+        "category": "frontend"
+      },
+      {
+        "name": "playwright",
+        "version": "1.58.0",
+        "category": "testing"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build 2>&1",
+    "testCommand": null,
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "eslint",
+      "audit:sanity": "node scripts/audit-sanity-drafts.mjs"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": "type-based"
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "docs",
+      "public",
+      "scripts",
+      "src"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "audit-results": {
+      "path": "audit-results",
+      "purpose": null,
+      "fileCount": 8,
+      "lastAccessed": 1777500265114,
+      "keyFiles": [
+        "AI_HUMANIZATION_RANK_SCORE.md",
+        "AUDIT_COMPLETE.txt",
+        "FINAL_COMPARISON_COMPLETE.md",
+        "NETLIFY_COMPARISON.md",
+        "audit-2026-01-28-1400.md"
+      ]
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 2,
+      "lastAccessed": 1777500265114,
+      "keyFiles": [
+        "AI_DETECTION_GUIDE.md",
+        "DETECTOR_TECHNICAL.md"
+      ]
+    },
+    "netlify": {
+      "path": "netlify",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1777500265121,
+      "keyFiles": []
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 15,
+      "lastAccessed": 1777500265122,
+      "keyFiles": [
+        "__forms.html",
+        "favicon-amp.svg",
+        "favicon.svg",
+        "file.svg",
+        "globe.svg"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 50,
+      "lastAccessed": 1777500265122,
+      "keyFiles": [
+        "aiseo_bot.js",
+        "aiseo_discovery.js",
+        "aiseo_discovery_elements.json",
+        "amp_copy_chunk_1_of_5.txt",
+        "amp_copy_chunk_2_of_5.txt"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 0,
+      "lastAccessed": 1777500265123,
+      "keyFiles": []
+    },
+    "src/app": {
+      "path": "src/app",
+      "purpose": "Application code",
+      "fileCount": 8,
+      "lastAccessed": 1777500265123,
+      "keyFiles": [
+        "favicon.ico",
+        "favicon.svg.tsx",
+        "globals.css"
+      ]
+    },
+    "src/components": {
+      "path": "src/components",
+      "purpose": "UI components",
+      "fileCount": 7,
+      "lastAccessed": 1777500265123,
+      "keyFiles": [
+        "AnimatedBackground.tsx",
+        "CursorTracker.tsx",
+        "Footer.tsx"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src/app/contact/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562034304,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/ai-chatbot/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562060866,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/ai-voice/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562083458,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/seo-content/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562107529,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/landing-pages/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562129604,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/social-media/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562151679,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/ad-copy/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562171423,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/email-automation/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562191125,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/google-business/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562212511,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/review-response/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562231553,
+      "type": "file"
+    },
+    {
+      "path": "src/app/pricing/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562422306,
+      "type": "file"
+    },
+    {
+      "path": "src/app/pricing/PricingClient.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562485522,
+      "type": "file"
+    },
+    {
+      "path": "src/app/blog/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562518439,
+      "type": "file"
+    },
+    {
+      "path": "src/app/blog/[slug]/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1777562563584,
+      "type": "file"
+    },
+    {
+      "path": "netlify.toml",
+      "accessCount": 2,
+      "lastAccessed": 1777562569132,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

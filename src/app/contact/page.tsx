@@ -22,11 +22,6 @@ export default function ContactPage() {
         setIsSubmitting(true);
 
         try {
-            // Netlify Forms: POST form-urlencoded to site root with form-name.
-            // Form shape is declared in public/__forms.html so Netlify's build-time
-            // scanner registers it (JSX forms from static export are invisible to it).
-            // The `subject` field is picked up by Netlify as the email subject line,
-            // tagging all AMP Marketing leads distinctly from the PME clone site.
             const body = new URLSearchParams();
             body.append('form-name', 'amp-marketing-contact');
             body.append('name', formData.name);
@@ -46,18 +41,11 @@ export default function ContactPage() {
 
             if (response.ok) {
                 setIsSuccess(true);
-                setFormData({
-                    name: '',
-                    email: '',
-                    phone: '',
-                    company: '',
-                    service_interest: '',
-                    message: '',
-                });
+                setFormData({ name: '', email: '', phone: '', company: '', service_interest: '', message: '' });
             } else {
                 throw new Error('Failed to submit');
             }
-        } catch (error) {
+        } catch {
             alert('Something went wrong. Please try again or call us directly at 617-651-1457.');
         } finally {
             setIsSubmitting(false);
@@ -65,185 +53,153 @@ export default function ContactPage() {
     };
 
     return (
-        <main className="min-h-screen bg-transparent font-poppins text-gray-200">
+        <>
             <Navbar />
 
-            <section className="bg-transparent py-24 pt-32">
-                <div className="container mx-auto px-4 text-center">
-                    <h1 className="text-4xl md:text-6xl font-black mb-6 text-white">Contact Us</h1>
-                    <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <header className="svc-hero">
+                <div className="shell">
+                    <div className="shape-meta fade-up">
+                        <span className="num">AMP MARKETING</span>
+                        <span className="bul">·</span>
+                        <span>contact</span>
+                        <span className="bul">·</span>
+                        <span>nashua, nh</span>
+                    </div>
+                    <h1 className="fade-up" style={{ animationDelay: '0.05s' }}>
+                        Contact<br />
+                        <em>Us.</em>
+                    </h1>
+                    <p className="lede fade-up" style={{ animationDelay: '0.1s' }}>
                         Do you have any questions? Are you interested in discussing your project? Please, send us a message and we will respond to you quickly—in most cases the same day.
                     </p>
                 </div>
-            </section>
+            </header>
 
-            <section className="py-20">
-                <div className="container mx-auto px-4 max-w-6xl">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                        <div className="bg-white/5 rounded-3xl p-10 shadow-xl border border-white/10 backdrop-blur-sm">
-                            <h2 className="text-2xl font-bold text-white mb-6">Drop Us a Line</h2>
+            <section className="section tight section-rule">
+                <div className="shell">
+                    <span className="section-counter">01 / 01</span>
+                    <div className="two-col" data-reveal>
+                        <div>
+                            <div className="section-head" style={{ marginBottom: '32px' }}>
+                                <div className="eyebrow">drop us a line</div>
+                                <h2>Send a Message.</h2>
+                            </div>
+
                             {isSuccess ? (
-                                <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-8 text-center">
-                                    <div className="text-5xl mb-4">✅</div>
-                                    <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                                    <p className="text-gray-300">Thanks for reaching out. We&apos;ll get back to you within 24 hours — usually the same day.</p>
-                                    <button
-                                        onClick={() => setIsSuccess(false)}
-                                        className="mt-6 text-indigo-400 font-bold hover:text-indigo-300 transition-colors"
-                                    >
+                                <div style={{ border: '1px solid var(--line-strong)', padding: '40px', textAlign: 'center' }}>
+                                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.1em', color: 'var(--amp-primary)', marginBottom: '16px', textTransform: 'uppercase' }}>→ message sent</div>
+                                    <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '28px', color: 'var(--amp-text)', marginBottom: '12px' }}>Thanks for reaching out.</h3>
+                                    <p style={{ color: 'var(--amp-muted)', marginBottom: '24px', lineHeight: 1.6 }}>We&apos;ll get back to you within 24 hours — usually the same day.</p>
+                                    <button onClick={() => setIsSuccess(false)} className="btn btn-ghost">
                                         Send another message
                                     </button>
                                 </div>
                             ) : (
-                                <form onSubmit={handleSubmit} className="space-y-6">
+                                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                                     <div>
-                                        <label className="block text-sm font-bold text-gray-300 mb-2">Your Name</label>
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            required
-                                            value={formData.name}
+                                        <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.08em', color: 'var(--amp-muted)', textTransform: 'uppercase', marginBottom: '8px' }}>Your Name</label>
+                                        <input type="text" name="name" required value={formData.name}
                                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all placeholder:text-gray-600"
                                             placeholder="John Smith"
-                                        />
+                                            style={{ width: '100%', padding: '12px 16px', background: 'transparent', border: '1px solid var(--line-strong)', color: 'var(--amp-text)', fontFamily: 'var(--font-sans)', fontSize: '15px', outline: 'none', boxSizing: 'border-box' }} />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-bold text-gray-300 mb-2">Email Address</label>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            required
-                                            value={formData.email}
+                                        <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.08em', color: 'var(--amp-muted)', textTransform: 'uppercase', marginBottom: '8px' }}>Email Address</label>
+                                        <input type="email" name="email" required value={formData.email}
                                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all placeholder:text-gray-600"
                                             placeholder="john@company.com"
-                                        />
+                                            style={{ width: '100%', padding: '12px 16px', background: 'transparent', border: '1px solid var(--line-strong)', color: 'var(--amp-text)', fontFamily: 'var(--font-sans)', fontSize: '15px', outline: 'none', boxSizing: 'border-box' }} />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-bold text-gray-300 mb-2">Phone Number</label>
-                                        <input
-                                            type="tel"
-                                            name="phone"
-                                            value={formData.phone}
+                                        <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.08em', color: 'var(--amp-muted)', textTransform: 'uppercase', marginBottom: '8px' }}>Phone Number</label>
+                                        <input type="tel" name="phone" value={formData.phone}
                                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all placeholder:text-gray-600"
                                             placeholder="(555) 123-4567"
-                                        />
+                                            style={{ width: '100%', padding: '12px 16px', background: 'transparent', border: '1px solid var(--line-strong)', color: 'var(--amp-text)', fontFamily: 'var(--font-sans)', fontSize: '15px', outline: 'none', boxSizing: 'border-box' }} />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-bold text-gray-300 mb-2">Company Name</label>
-                                        <input
-                                            type="text"
-                                            name="company"
-                                            value={formData.company}
+                                        <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.08em', color: 'var(--amp-muted)', textTransform: 'uppercase', marginBottom: '8px' }}>Company Name</label>
+                                        <input type="text" name="company" value={formData.company}
                                             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all placeholder:text-gray-600"
                                             placeholder="Your Company LLC"
-                                        />
+                                            style={{ width: '100%', padding: '12px 16px', background: 'transparent', border: '1px solid var(--line-strong)', color: 'var(--amp-text)', fontFamily: 'var(--font-sans)', fontSize: '15px', outline: 'none', boxSizing: 'border-box' }} />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-bold text-gray-300 mb-2">What are you looking for?</label>
-                                        <select
-                                            name="service_interest"
-                                            value={formData.service_interest}
+                                        <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.08em', color: 'var(--amp-muted)', textTransform: 'uppercase', marginBottom: '8px' }}>What are you looking for?</label>
+                                        <select name="service_interest" value={formData.service_interest}
                                             onChange={(e) => setFormData({ ...formData, service_interest: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all appearance-none cursor-pointer"
-                                        >
-                                            <option value="" className="bg-slate-900">Select a service...</option>
-                                            <option value="ai-chatbot" className="bg-slate-900">AI Chatbot Setup</option>
-                                            <option value="ai-voice" className="bg-slate-900">AI Voice Receptionist</option>
-                                            <option value="google-business" className="bg-slate-900">Google Business Optimization</option>
-                                            <option value="review-response" className="bg-slate-900">AI Review Response</option>
-                                            <option value="email-automation" className="bg-slate-900">Email Automation</option>
-                                            <option value="social-media" className="bg-slate-900">Social Media Content</option>
-                                            <option value="ad-copy" className="bg-slate-900">AI Ad Copy</option>
-                                            <option value="seo-content" className="bg-slate-900">SEO Content Writing</option>
-                                            <option value="landing-pages" className="bg-slate-900">Landing Page Creation</option>
-                                            <option value="lead-funnel" className="bg-slate-900">Lead Magnet & Funnel</option>
-                                            <option value="multiple" className="bg-slate-900">Multiple Services</option>
-                                            <option value="other" className="bg-slate-900">Something Else</option>
+                                            style={{ width: '100%', padding: '12px 16px', background: 'var(--amp-bg)', border: '1px solid var(--line-strong)', color: formData.service_interest ? 'var(--amp-text)' : 'var(--amp-muted)', fontFamily: 'var(--font-sans)', fontSize: '15px', outline: 'none', boxSizing: 'border-box', appearance: 'none', cursor: 'pointer' }}>
+                                            <option value="">Select a service...</option>
+                                            <option value="ai-chatbot">AI Chatbot Setup</option>
+                                            <option value="ai-voice">AI Voice Receptionist</option>
+                                            <option value="google-business">Google Business Optimization</option>
+                                            <option value="review-response">AI Review Response</option>
+                                            <option value="email-automation">Email Automation</option>
+                                            <option value="social-media">Social Media Content</option>
+                                            <option value="ad-copy">AI Ad Copy</option>
+                                            <option value="seo-content">SEO Content Writing</option>
+                                            <option value="landing-pages">Landing Page Creation</option>
+                                            <option value="lead-funnel">Lead Magnet &amp; Funnel</option>
+                                            <option value="multiple">Multiple Services</option>
+                                            <option value="other">Something Else</option>
                                         </select>
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-bold text-gray-300 mb-2">What&apos;s on your mind?</label>
-                                        <textarea
-                                            name="message"
-                                            rows={4}
-                                            value={formData.message}
+                                        <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.08em', color: 'var(--amp-muted)', textTransform: 'uppercase', marginBottom: '8px' }}>What&apos;s on your mind?</label>
+                                        <textarea name="message" rows={4} value={formData.message}
                                             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all resize-none placeholder:text-gray-600"
                                             placeholder="What are you hoping to fix or improve? What's getting in the way?"
-                                        ></textarea>
+                                            style={{ width: '100%', padding: '12px 16px', background: 'transparent', border: '1px solid var(--line-strong)', color: 'var(--amp-text)', fontFamily: 'var(--font-sans)', fontSize: '15px', outline: 'none', resize: 'none', boxSizing: 'border-box' }} />
                                     </div>
-                                    <button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        className="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-indigo-500/30 transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:transform-none"
-                                    >
-                                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                                    <button type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ opacity: isSubmitting ? 0.5 : 1 }}>
+                                        {isSubmitting ? 'Sending...' : '→ Send Message'}
                                     </button>
-                                    <p className="text-xs text-gray-500 text-center">Most times, we respond within 24 hours.</p>
+                                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--amp-muted)', letterSpacing: '0.04em', textAlign: 'center' }}>Most times, we respond within 24 hours.</p>
                                 </form>
                             )}
                         </div>
-                        <div className="space-y-8">
-                            <div className="bg-white/5 rounded-3xl p-10 border border-white/10 backdrop-blur-sm">
-                                <h2 className="text-2xl font-bold text-white mb-6">Other Ways to Reach Us</h2>
-                                <div className="space-y-6">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
-                                            <span className="text-2xl">📍</span>
+
+                        <aside>
+                            <div className="price-card" style={{ marginBottom: '24px' }}>
+                                <div className="label">other ways to reach us</div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '8px' }}>
+                                    {[
+                                        { label: 'Stop by', detail: '74 Northeastern Blvd #12a Ste 101\nNashua, NH 03062' },
+                                        { label: 'Email us', detail: 'hello@ampmarketing.io' },
+                                        { label: 'Call us', detail: '617-651-1457' },
+                                    ].map((item) => (
+                                        <div key={item.label}>
+                                            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.1em', color: 'var(--amp-primary)', marginBottom: '6px', textTransform: 'uppercase' }}>→ {item.label}</div>
+                                            <p style={{ color: 'var(--amp-muted)', fontSize: '14px', lineHeight: 1.55, whiteSpace: 'pre-line' }}>{item.detail}</p>
                                         </div>
-                                        <div>
-                                            <p className="font-bold text-white">Stop by</p>
-                                            <p className="text-gray-400">74 Northeastern Blvd #12a Ste 101<br />Nashua, NH 03062</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
-                                            <span className="text-2xl">📧</span>
-                                        </div>
-                                        <div>
-                                            <p className="font-bold text-white">Email us</p>
-                                            <p className="text-gray-400">hello@ampmarketing.io</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
-                                            <span className="text-2xl">📞</span>
-                                        </div>
-                                        <div>
-                                            <p className="font-bold text-white">Call us</p>
-                                            <p className="text-gray-400">617-651-1457</p>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
-                            <div className="bg-gradient-to-br from-indigo-600/20 to-purple-600/20 rounded-3xl p-10 border border-white/10 backdrop-blur-sm relative overflow-hidden group">
-                                <div className="absolute inset-0 bg-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                <h3 className="text-2xl font-bold text-white mb-4 relative z-10">Let&apos;s Talk</h3>
-                                <p className="text-gray-300 mb-6 relative z-10 leading-relaxed">
-                                    15 minutes for free. Tell us what is your problem. You won&apos;t get pressured or pitched here — only a real conversation on whether we could be the right people to help you.
+
+                            <div className="price-card">
+                                <div className="label">when we&apos;re around</div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '12px' }}>
+                                    {[
+                                        { day: 'Monday – Friday', hours: '9:00 AM – 6:00 PM EST' },
+                                        { day: 'Saturday', hours: '10:00 AM – 2:00 PM EST' },
+                                        { day: 'Sunday', hours: 'Closed' },
+                                    ].map((row) => (
+                                        <div key={row.day} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--line)', paddingBottom: '10px' }}>
+                                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--amp-muted)' }}>{row.day}</span>
+                                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--amp-text)' }}>{row.hours}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--amp-muted)', letterSpacing: '0.04em', marginTop: '20px' }}>
+                                    15 minutes, no pressure. we&apos;ll discuss your goals and see if we&apos;re the right fit.
                                 </p>
-                                <a href="mailto:michael@primemarketingexperts.com" className="relative z-10 block w-full bg-white text-black text-center py-4 rounded-xl font-bold hover:bg-gray-100 transition-all transform hover:scale-[1.02] shadow-xl shadow-white/10">
-                                    Email Us
-                                </a>
                             </div>
-                            <div className="bg-black/40 rounded-3xl p-10 border border-white/10 backdrop-blur-sm">
-                                <h3 className="text-xl font-bold text-white mb-4">When We&apos;re Around</h3>
-                                <div className="space-y-3 text-gray-400">
-                                    <p className="flex justify-between border-b border-white/5 pb-2"><span>Monday - Friday</span><span className="text-white">9:00 AM - 6:00 PM EST</span></p>
-                                    <p className="flex justify-between border-b border-white/5 pb-2"><span>Saturday</span><span className="text-white">10:00 AM - 2:00 PM EST</span></p>
-                                    <p className="flex justify-between"><span>Sunday</span><span className="text-white font-semibold text-violet-500">Closed</span></p>
-                                </div>
-                            </div>
-                        </div>
+                        </aside>
                     </div>
                 </div>
             </section>
 
             <Footer />
-        </main>
+        </>
     );
 }
