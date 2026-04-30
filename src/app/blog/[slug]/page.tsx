@@ -6,6 +6,7 @@ import { getPost, getPosts, urlFor } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import type { Metadata } from 'next';
+import { ampBlogPosts, type AmpBlogPost, type AmpSection } from '@/lib/amp-blog-posts';
 
 const SITE_URL = 'https://ampmarketing-io-enhanced-ux.netlify.app';
 const SITE_NAME = 'AMP Marketing';
@@ -58,15 +59,17 @@ type PostShape = {
 };
 
 export async function generateStaticParams() {
+  const staticSlugs = ampBlogPosts.map(p => ({ slug: p.slug }));
   try {
     const posts = await getPosts();
     if (posts && posts.length > 0) {
-      return posts.map((post: { slug: { current: string } }) => ({
+      const sanitySlugs = posts.map((post: { slug: { current: string } }) => ({
         slug: post.slug.current,
       }));
+      return [...staticSlugs, ...sanitySlugs];
     }
   } catch {}
-  return [{ slug: 'placeholder' }];
+  return [...staticSlugs, { slug: 'placeholder' }];
 }
 
 export async function generateMetadata({
@@ -77,7 +80,33 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const post = (await getPost(slug)) as PostShape | null;
-    if (!post) return { title: 'Post Not Found' };
+    if (!post) {
+      const staticPost = ampBlogPosts.find(p => p.slug === slug);
+      if (staticPost) {
+        return {
+          title: staticPost.title,
+          description: staticPost.metaDescription,
+          keywords: staticPost.keywords,
+          alternates: { canonical: `${SITE_URL}/blog/${staticPost.slug}/` },
+          openGraph: {
+            type: 'article',
+            title: staticPost.title,
+            description: staticPost.metaDescription,
+            url: `${SITE_URL}/blog/${staticPost.slug}/`,
+            siteName: SITE_NAME,
+            publishedTime: staticPost.publishedAt,
+            images: [{ url: staticPost.heroImage, width: 1200, height: 600 }],
+          },
+          twitter: {
+            card: 'summary_large_image',
+            title: staticPost.title,
+            description: staticPost.metaDescription,
+            images: [staticPost.heroImage],
+          },
+        };
+      }
+      return { title: 'Post Not Found' };
+    }
 
     const seo = post.seo || {};
     const title = seo.metaTitle || post.title;
@@ -119,6 +148,30 @@ export async function generateMetadata({
       },
     };
   } catch {
+    const staticPost = ampBlogPosts.find(p => p.slug === slug);
+    if (staticPost) {
+      return {
+        title: staticPost.title,
+        description: staticPost.metaDescription,
+        keywords: staticPost.keywords,
+        alternates: { canonical: `${SITE_URL}/blog/${staticPost.slug}/` },
+        openGraph: {
+          type: 'article',
+          title: staticPost.title,
+          description: staticPost.metaDescription,
+          url: `${SITE_URL}/blog/${staticPost.slug}/`,
+          siteName: SITE_NAME,
+          publishedTime: staticPost.publishedAt,
+          images: [{ url: staticPost.heroImage, width: 1200, height: 600 }],
+        },
+        twitter: {
+          card: 'summary_large_image',
+          title: staticPost.title,
+          description: staticPost.metaDescription,
+          images: [staticPost.heroImage],
+        },
+      };
+    }
     return { title: 'Post Not Found' };
   }
 }
@@ -205,6 +258,86 @@ const portableTextComponents = {
   },
 };
 
+function buildStaticPostJsonLd(post: AmpBlogPost) {
+  const url = `${SITE_URL}/blog/${post.slug}/`;
+
+  const article: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.metaDescription,
+    image: [post.heroImage],
+    datePublished: post.publishedAt,
+    author: { '@type': 'Person', name: post.author },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      logo: { '@type': 'ImageObject', url: ORG_LOGO },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  };
+
+  const breadcrumbs = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: SITE_URL + '/blog/' },
+      { '@type': 'ListItem', position: 3, name: post.title, item: url },
+    ],
+  };
+
+  const faqs =
+    post.faqs && post.faqs.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: post.faqs.map(f => ({
+            '@type': 'Question',
+            name: f.question,
+            acceptedAnswer: { '@type': 'Answer', text: f.answer },
+          })),
+        }
+      : null;
+
+  return [article, breadcrumbs, faqs].filter(Boolean) as Record<string, unknown>[];
+}
+
+function renderSection(section: AmpSection, midImage: string, midImageAlt: string, idx: number) {
+  return (
+    <div key={idx}>
+      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 700, color: 'var(--amp-text)', marginTop: '3rem', marginBottom: '1.25rem', lineHeight: 1.2 }}>
+        {section.heading}
+      </h2>
+      {section.paragraphs.map((para, pIdx) => (
+        <p
+          key={pIdx}
+          dangerouslySetInnerHTML={{ __html: para }}
+          style={{ color: 'var(--amp-muted)', lineHeight: 1.8, marginBottom: '1.5rem', fontSize: '15px' }}
+        />
+      ))}
+      {section.bullets && section.bullets.length > 0 && (
+        <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem', color: 'var(--amp-muted)', lineHeight: 1.8, listStyleType: 'disc' }}>
+          {section.bullets.map((bullet, bIdx) => (
+            <li key={bIdx} style={{ marginBottom: '0.5rem' }}>{bullet}</li>
+          ))}
+        </ul>
+      )}
+      {section.showImageAfter && (
+        <div style={{ margin: '2rem 0', overflow: 'hidden', border: '1px solid var(--line)' }}>
+          <Image
+            src={midImage}
+            alt={midImageAlt}
+            width={800}
+            height={400}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
 function buildJsonLd(post: PostShape) {
   const url =
     post.seo?.canonicalUrl || `${SITE_URL}/blog/${post.slug.current}/`;
@@ -273,14 +406,149 @@ export default async function BlogPostPage({
 }) {
   const { slug } = await params;
 
+  // Try Sanity first
   let post: PostShape | null = null;
   try {
     post = (await getPost(slug)) as PostShape | null;
   } catch {
-    notFound();
+    // Sanity failed — fall through to static posts
   }
 
+  // If Sanity returned nothing, check static posts
   if (!post) {
+    const staticPost = ampBlogPosts.find(p => p.slug === slug);
+    if (staticPost) {
+      const jsonLd = buildStaticPostJsonLd(staticPost);
+      return (
+        <>
+          <Navbar />
+
+          {jsonLd.map((blob, i) => (
+            <script
+              key={i}
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(blob) }}
+            />
+          ))}
+
+          <article>
+            <header className="svc-hero" style={{ paddingBottom: '0' }}>
+              <div className="shell">
+                <Link
+                  href="/blog"
+                  style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.08em', color: 'var(--amp-primary)', textTransform: 'uppercase', textDecoration: 'none', display: 'inline-block', marginBottom: '24px' }}
+                >
+                  ← Back to Blog
+                </Link>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.1em', color: 'var(--amp-primary)', textTransform: 'uppercase', marginBottom: '16px' }}>
+                  {staticPost.category}
+                </div>
+                <h1 className="fade-up" style={{ animationDelay: '0.05s' }}>
+                  {staticPost.title}
+                </h1>
+                <div className="fade-up" style={{ animationDelay: '0.1s', display: 'flex', alignItems: 'center', gap: '24px', marginTop: '16px' }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--amp-muted)', letterSpacing: '0.04em' }}>{new Date(staticPost.publishedAt).toLocaleDateString()}</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--amp-muted)', letterSpacing: '0.04em' }}>{staticPost.readTime} min read</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--amp-muted)', letterSpacing: '0.04em' }}>{staticPost.author}</span>
+                </div>
+              </div>
+            </header>
+
+            <section style={{ padding: '0 0 var(--space-8)' }}>
+              <div className="shell" style={{ paddingTop: 'var(--space-8)' }}>
+                <div style={{ overflow: 'hidden', border: '1px solid var(--line)' }}>
+                  <Image
+                    src={staticPost.heroImage}
+                    alt={staticPost.heroImageAlt}
+                    width={1200}
+                    height={600}
+                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                  />
+                </div>
+              </div>
+            </section>
+
+            <section style={{ padding: 'var(--space-8) 0' }}>
+              <div className="shell" style={{ maxWidth: '780px' }}>
+                <p style={{ fontSize: '18px', color: 'var(--amp-text)', lineHeight: 1.75, marginBottom: '2rem', fontWeight: 500, borderLeft: '2px solid var(--amp-primary)', paddingLeft: '1.5rem' }}>
+                  {staticPost.intro}
+                </p>
+                {staticPost.sections.map((section, idx) =>
+                  renderSection(section, staticPost.midImage, staticPost.midImageAlt, idx)
+                )}
+              </div>
+            </section>
+
+            {staticPost.faqs && staticPost.faqs.length > 0 && (
+              <section style={{ padding: 'var(--space-8) 0', borderTop: '1px solid var(--line)' }}>
+                <div className="shell" style={{ maxWidth: '780px' }}>
+                  <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 700, color: 'var(--amp-text)', marginBottom: '2rem' }}>
+                    Frequently Asked Questions
+                  </h2>
+                  <div className="faqs">
+                    {staticPost.faqs.map((faq, i) => (
+                      <div className="faq" key={i}>
+                        <div className="num">{String(i + 1).padStart(2, '0')}</div>
+                        <div>
+                          <div className="q">{faq.question}</div>
+                          <p className="a">{faq.answer}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {staticPost.relatedServices && staticPost.relatedServices.length > 0 && (
+              <section style={{ padding: 'var(--space-8) 0', borderTop: '1px solid var(--line)' }}>
+                <div className="shell">
+                  <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 700, color: 'var(--amp-text)', marginBottom: '2rem' }}>
+                    Related Services
+                  </h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
+                    {staticPost.relatedServices.map((s, i) => (
+                      <Link
+                        key={i}
+                        href={s.path}
+                        style={{ display: 'block', padding: '24px', border: '1px solid var(--line)', textDecoration: 'none', transition: 'border-color 0.2s' }}
+                      >
+                        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 700, color: 'var(--amp-text)', marginBottom: '8px' }}>
+                          {s.title}
+                        </h3>
+                        <p style={{ fontSize: '13px', color: 'var(--amp-muted)', lineHeight: 1.5, marginBottom: '12px' }}>
+                          {s.description}
+                        </p>
+                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--amp-primary)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                          Learn more →
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
+          </article>
+
+          <section className="closing">
+            <div className="shell">
+              <div className="section-head" data-reveal>
+                <div className="eyebrow">→ ready to get results?</div>
+                <h2>Let&apos;s Put AI<br />to Work for You.</h2>
+                <p className="lede">Let&apos;s help you implement AI-powered marketing that actually works.</p>
+              </div>
+              <div className="closing-actions" data-reveal>
+                <Link href="/contact" className="btn btn-primary">→ Book a Free Call</Link>
+                <Link href="/blog" className="btn btn-ghost">← Back to Blog</Link>
+              </div>
+            </div>
+          </section>
+
+          <Footer />
+        </>
+      );
+    }
+
     notFound();
   }
 
