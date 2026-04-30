@@ -5,7 +5,7 @@ import { schemaTypes } from '@/sanity/schemas'
 import { aiAuditAction } from '@/sanity/actions/aiAuditAction'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '36hj0d6k'
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+const dataset = 'ampmarketing'
 
 export default defineConfig({
   name: 'amp-marketing',
