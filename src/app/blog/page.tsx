@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { getPosts, urlFor } from '@/sanity/lib/client';
 import Image from 'next/image';
 import type { Metadata } from "next";
-import { ampBlogPosts } from '@/lib/amp-blog-posts';
 
 export const metadata: Metadata = {
   title: "Marketing Blog | AI Tips, Lead Generation Strategies & Growth Guides",
@@ -88,28 +87,15 @@ interface Post {
 }
 
 export default async function BlogPage() {
-    const staticPosts: Post[] = ampBlogPosts.map(p => ({
-        _id: `static-${p.slug}`,
-        title: p.title,
-        excerpt: p.excerpt,
-        category: p.category,
-        publishedAt: p.publishedAt,
-        readTime: p.readTime,
-        slug: { current: p.slug },
-        heroImage: p.heroImage,
-    }));
-
     let posts: Post[] = [];
 
     try {
         const sanityPosts = await getPosts();
-        if (sanityPosts && sanityPosts.length > 0) {
-            posts = [...sanityPosts, ...staticPosts, ...fallbackPosts];
-        } else {
-            posts = [...staticPosts, ...fallbackPosts];
-        }
+        posts = sanityPosts && sanityPosts.length > 0
+            ? [...sanityPosts, ...fallbackPosts]
+            : [...fallbackPosts];
     } catch {
-        posts = [...staticPosts, ...fallbackPosts];
+        posts = [...fallbackPosts];
     }
 
     return (
