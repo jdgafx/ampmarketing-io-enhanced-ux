@@ -32,8 +32,6 @@ export function urlFor(source: unknown) {
  */
 export async function getPosts() {
   if (!client) return []
-  // Index/cards: keep category as a plain string so the existing
-  // blog/page.tsx (which renders {post.category} directly) doesn't break.
   return client.fetch(
     `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
       _id,
@@ -46,8 +44,6 @@ export async function getPosts() {
       "category": category->title,
       "author": author->name
     }`,
-    {},
-    { next: { tags: ['post'] } },
   )
 }
 
@@ -58,7 +54,25 @@ export async function getPosts() {
  */
 export async function getPost(slug: string) {
   if (!client) return null
-  return client.fetch(
+  // Retry on transient build-time CDN misses. With output:'export' we fetch
+  // 10+ posts in rapid succession during prerender; sporadic null responses
+  // were producing baked-in "Post Not Found" pages until we added this.
+  let lastErr: unknown
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const result = await fetchPost(slug)
+      if (result) return result
+    } catch (err) {
+      lastErr = err
+    }
+    await new Promise((r) => setTimeout(r, 500 * (attempt + 1)))
+  }
+  if (lastErr) throw lastErr
+  return null
+}
+
+async function fetchPost(slug: string) {
+  return client!.fetch(
     `*[_type == "post" && slug.current == $slug][0] {
       _id,
       _updatedAt,
@@ -84,7 +98,6 @@ export async function getPost(slug: string) {
       }
     }`,
     { slug },
-    { next: { tags: ['post', `post:${slug}`] } },
   )
 }
 
@@ -112,7 +125,5 @@ export async function getCategories() {
       slug,
       description
     }`,
-    {},
-    { next: { tags: ['category'] } },
   )
 }
