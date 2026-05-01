@@ -267,27 +267,31 @@ function buildJsonLd(post: PostShape) {
 function getPostImageUrl(title: string, category: string): string {
   const text = (title + ' ' + category).toLowerCase();
   if (/chatbot|ai agent|sales agent|conversational ai/.test(text))
-    return 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=1200&h=600&fit=crop&auto=format&q=75';
+    return 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&h=600&fit=crop&auto=format&q=75';
   if (/voice|phone|call center|receptionist/.test(text))
-    return 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=600&fit=crop&auto=format&q=75';
+    return 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=1200&h=600&fit=crop&auto=format&q=75';
   if (/lead gen|lead generation|funnel|leads/.test(text))
     return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=600&fit=crop&auto=format&q=75';
-  if (/email|follow.?up|sequence|newsletter|drip/.test(text))
+  if (/email|follow.?up|sequence|newsletter|drip|deliverability/.test(text))
     return 'https://images.unsplash.com/photo-1516387938699-a93567ec168e?w=1200&h=600&fit=crop&auto=format&q=75';
-  if (/seo|search engine|rank|organic|content/.test(text))
-    return 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=1200&h=600&fit=crop&auto=format&q=75';
-  if (/social media|instagram|facebook|tiktok|linkedin post/.test(text))
+  if (/\bseo\b|search engine optim|link build|organic search|keyword rank/.test(text))
+    return 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=1200&h=600&fit=crop&auto=format&q=75';
+  if (/social media|instagram|facebook|tiktok|linkedin post|followers|engagement/.test(text))
     return 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&h=600&fit=crop&auto=format&q=75';
-  if (/\bad\b|ppc|bing ads|google ads|paid search|advertising/.test(text))
+  if (/\bad\b|ppc|bing ads|google ads|paid search|advertising|search engine ad/.test(text))
     return 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop&auto=format&q=75';
   if (/review|reputation|rating|star/.test(text))
-    return 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&h=600&fit=crop&auto=format&q=75';
+    return 'https://images.unsplash.com/photo-1599658880436-c61792e70672?w=1200&h=600&fit=crop&auto=format&q=75';
   if (/automat|workflow|zapier|integration|crm/.test(text))
     return 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1200&h=600&fit=crop&auto=format&q=75';
-  if (/sales|pipeline|deal|close|win/.test(text))
+  if (/sales|pipeline|deal|close|win|productivity/.test(text))
     return 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=600&fit=crop&auto=format&q=75';
-  if (/report|analytics|data|metric|stat|growth/.test(text))
+  if (/report|analytics|data|metric|stat/.test(text))
     return 'https://images.unsplash.com/photo-1543286386-713bdd548da4?w=1200&h=600&fit=crop&auto=format&q=75';
+  if (/website|web design|landing page|accessibility|compliance/.test(text))
+    return 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&h=600&fit=crop&auto=format&q=75';
+  if (/content|strategy|inbound|digital marketing|martech/.test(text))
+    return 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=600&fit=crop&auto=format&q=75';
   if (/ai|artificial intelligence|machine learning|tool/.test(text))
     return 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&h=600&fit=crop&auto=format&q=75';
   return 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=600&fit=crop&auto=format&q=75';
