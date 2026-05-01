@@ -264,6 +264,61 @@ function buildJsonLd(post: PostShape) {
   >[];
 }
 
+function getServiceCTAs(post: PostShape): {
+  primary: { href: string; label: string };
+  secondary: { href: string; label: string };
+} {
+  if (post.relatedServices && post.relatedServices.length >= 2) {
+    return {
+      primary: { href: post.relatedServices[0].path, label: 'Explore ' + post.relatedServices[0].title },
+      secondary: { href: post.relatedServices[1].path, label: 'Explore ' + post.relatedServices[1].title },
+    };
+  }
+
+  const text = (post.title + ' ' + (post.category?.title || '')).toLowerCase();
+
+  if (/chatbot|ai agent|sales agent/.test(text)) {
+    return { primary: { href: '/services/ai-chatbot', label: 'Explore AI Chatbots' }, secondary: { href: '/services/lead-funnel', label: 'Build Your Lead Funnel' } };
+  }
+  if (/voice|phone|receptionist/.test(text)) {
+    return { primary: { href: '/services/ai-voice', label: 'Try AI Voice' }, secondary: { href: '/services/ai-chatbot', label: 'Explore AI Chatbots' } };
+  }
+  if (/lead gen|lead generation|leads/.test(text)) {
+    return { primary: { href: '/services/lead-funnel', label: 'Build Your Lead Funnel' }, secondary: { href: '/services/landing-pages', label: 'See Landing Pages' } };
+  }
+  if (/email|follow up|sequence/.test(text)) {
+    return { primary: { href: '/services/email-automation', label: 'Automate Your Emails' }, secondary: { href: '/services/lead-funnel', label: 'Build Your Lead Funnel' } };
+  }
+  if (/seo|content|rank|search/.test(text)) {
+    return { primary: { href: '/services/seo-content', label: 'Get SEO Content' }, secondary: { href: '/services/google-business', label: 'Optimize Google Business' } };
+  }
+  if (/social media|social/.test(text)) {
+    return { primary: { href: '/services/social-media', label: 'Manage Social Media' }, secondary: { href: '/services/ad-copy', label: 'Write Better Ads' } };
+  }
+  if (/\bad\b|ppc|bing|google ads/.test(text)) {
+    return { primary: { href: '/services/ad-copy', label: 'Write Better Ads' }, secondary: { href: '/services/landing-pages', label: 'See Landing Pages' } };
+  }
+  if (/review|reputation/.test(text)) {
+    return { primary: { href: '/services/review-response', label: 'Manage Reviews' }, secondary: { href: '/services/google-business', label: 'Optimize Google Business' } };
+  }
+  if (/automat|workflow/.test(text)) {
+    return { primary: { href: '/services/email-automation', label: 'Automate Your Emails' }, secondary: { href: '/services/lead-funnel', label: 'Build Your Lead Funnel' } };
+  }
+
+  const category = (post.category?.title || '').toLowerCase();
+  if (category === 'sales') {
+    return { primary: { href: '/services/ai-chatbot', label: 'Explore AI Chatbots' }, secondary: { href: '/services/lead-funnel', label: 'Build Your Lead Funnel' } };
+  }
+  if (category === 'technology') {
+    return { primary: { href: '/services/ai-chatbot', label: 'Explore AI Chatbots' }, secondary: { href: '/services/ai-voice', label: 'Try AI Voice' } };
+  }
+  if (category === 'marketing') {
+    return { primary: { href: '/services/seo-content', label: 'Get SEO Content' }, secondary: { href: '/services/social-media', label: 'Manage Social Media' } };
+  }
+
+  return { primary: { href: '/services/lead-funnel', label: 'Build Your Lead Funnel' }, secondary: { href: '/services/ai-chatbot', label: 'Explore AI Chatbots' } };
+}
+
 export default async function BlogPostPage({
   params,
 }: {
@@ -283,6 +338,7 @@ export default async function BlogPostPage({
   }
 
   const jsonLd = buildJsonLd(post);
+  const ctas = getServiceCTAs(post);
 
   return (
     <>
@@ -450,13 +506,13 @@ export default async function BlogPostPage({
       <section className="closing">
         <div className="shell">
           <div className="section-head" data-reveal>
-            <div className="eyebrow">→ ready to get results?</div>
-            <h2>Let&apos;s Put AI<br />to Work for You.</h2>
-            <p className="lede">Let&apos;s help you implement AI-powered marketing that actually works.</p>
+            <div className="eyebrow">→ related services</div>
+            <h2>Keep Exploring.</h2>
+            <p className="lede">Dig deeper into the services behind this topic.</p>
           </div>
           <div className="closing-actions" data-reveal>
-            <Link href="/contact" className="btn btn-primary">→ Book a Free Call</Link>
-            <Link href="/blog" className="btn btn-ghost">← Back to Blog</Link>
+            <Link href={ctas.primary.href} className="btn btn-primary">→ {ctas.primary.label}</Link>
+            <Link href={ctas.secondary.href} className="btn btn-ghost">← {ctas.secondary.label}</Link>
           </div>
         </div>
       </section>

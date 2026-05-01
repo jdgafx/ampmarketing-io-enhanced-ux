@@ -24,6 +24,7 @@ const fallbackPosts = [
         publishedAt: '2025-01-25',
         readTime: 12,
         slug: { current: '' },
+        heroImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop&auto=format&q=75',
         url: 'https://www.hubspot.com/state-of-marketing'
     },
     {
@@ -33,6 +34,7 @@ const fallbackPosts = [
         publishedAt: '2025-01-20',
         readTime: 10,
         slug: { current: '' },
+        heroImage: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&h=400&fit=crop&auto=format&q=75',
         url: 'https://www.ruh.ai/blogs/best-ai-sales-agents-for-business'
     },
     {
@@ -42,6 +44,7 @@ const fallbackPosts = [
         publishedAt: '2025-01-10',
         readTime: 8,
         slug: { current: '' },
+        heroImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&auto=format&q=75',
         url: 'https://fr.dorik.com/blog/best-ai-lead-generation-software'
     },
     {
@@ -51,6 +54,7 @@ const fallbackPosts = [
         publishedAt: '2025-01-05',
         readTime: 9,
         slug: { current: '' },
+        heroImage: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=800&h=400&fit=crop&auto=format&q=75',
         url: 'https://heyform.net/blog/the-ultimate-guide-to-heyform-zapier-integration-automate-lead-generation-in-2025/'
     },
     {
@@ -60,6 +64,7 @@ const fallbackPosts = [
         publishedAt: '2024-12-28',
         readTime: 7,
         slug: { current: '' },
+        heroImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop&auto=format&q=75',
         url: 'https://www.linkedin.com/pulse/5-ways-top-sales-reps-used-ai-crush-2025-goals-what-you-fairchild-b6nme'
     }
 ];
