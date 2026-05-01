@@ -21,9 +21,10 @@ const client = createClient({
 })
 
 const POST_ID = 'post-' + 'social-media-content-system-without-burnout'
-// Adem AY — multi-platform social apps on phone (Instagram, Facebook, YouTube, X, TikTok)
-const NEW_HERO = 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1200&h=600&fit=crop&auto=format&q=75'
-const ALT = 'Phone displaying multiple social media app icons including Instagram, Facebook, YouTube, X and TikTok'
+// Igor Miske — iPhone home screen showing many social media app icons
+// (Instagram, Facebook, Twitter, Snapchat, YouTube, etc.) all visible together
+const NEW_HERO = 'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1200&h=600&fit=crop&auto=format&q=75'
+const ALT = 'iPhone home screen displaying multiple social media app icons including Instagram, Facebook, Twitter, Snapchat, and YouTube'
 
 async function main() {
   // Find post by slug instead of guessing _id (the deterministic hash is computed in migration script)
