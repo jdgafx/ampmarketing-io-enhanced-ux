@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getPost, getPosts, urlFor } from '@/sanity/lib/client';
+import { getAllPostSlugs, getPost, urlFor } from '@/sanity/lib/client';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import type { Metadata } from 'next';
@@ -59,11 +59,9 @@ type PostShape = {
 
 export async function generateStaticParams() {
   try {
-    const posts = await getPosts();
-    if (posts && posts.length > 0) {
-      return posts.map((post: { slug: { current: string } }) => ({
-        slug: post.slug.current,
-      }));
+    const slugs = await getAllPostSlugs();
+    if (slugs && slugs.length > 0) {
+      return slugs.map((s) => ({ slug: s.slug }));
     }
   } catch {}
   return [{ slug: 'placeholder' }];
