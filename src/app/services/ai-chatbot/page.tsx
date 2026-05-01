@@ -1,11 +1,21 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "AI Chatbot Setup",
   description: "An AI chatbot that captures leads around the clock. Never lose another website visitor.",
   keywords: ["AI chatbot for business", "website chatbot service", "lead capture chatbot", "automated appointment booking chatbot", "24/7 AI chatbot", "AI lead qualification", "chatbot for small business", "best business chatbot 2025", "AI customer service chatbot", "chatbot lead generation", "website visitor engagement bot", "conversational AI for business", "chatbot setup service", "AI chatbot agency"],
+  openGraph: {
+    title: "AI Chatbot Setup | AMP Marketing",
+    description: "An AI chatbot that captures leads around the clock. Never lose another website visitor.",
+    url: "https://ampmarketing-io-enhanced-ux.netlify.app/services/ai-chatbot",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://ampmarketing-io-enhanced-ux.netlify.app/services/ai-chatbot",
+  },
 };
 
 const faqs = [

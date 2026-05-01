@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact Us | Let's Grow Your Business",
     description: "Schedule a free consultation or start your 7-day trial. Call 617-651-1457 or fill out our contact form.",
-    url: "https://melodic-flow-enhanced-ux.netlify.app/contact",
+    url: "https://ampmarketing-io-enhanced-ux.netlify.app/contact",
   },
 };
 

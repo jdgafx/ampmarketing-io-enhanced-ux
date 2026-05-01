@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1777500265124,
+  "lastScanned": 1777586877446,
   "projectRoot": "/home/chris/dev/CUSTOMER_PROJECTS/convertiq.com/ampmarketing.io-enhanced-ux-new",
   "techStack": {
     "languages": [
@@ -47,7 +47,7 @@
     "runtime": null
   },
   "build": {
-    "buildCommand": "npm run build 2>&1",
+    "buildCommand": "npx tsc --noEmit 2>&1 | head -20",
     "testCommand": null,
     "lintCommand": "npm run lint",
     "devCommand": "npm run dev",
@@ -85,7 +85,7 @@
       "path": "audit-results",
       "purpose": null,
       "fileCount": 8,
-      "lastAccessed": 1777500265114,
+      "lastAccessed": 1777586877420,
       "keyFiles": [
         "AI_HUMANIZATION_RANK_SCORE.md",
         "AUDIT_COMPLETE.txt",
@@ -98,7 +98,7 @@
       "path": "docs",
       "purpose": "Documentation",
       "fileCount": 2,
-      "lastAccessed": 1777500265114,
+      "lastAccessed": 1777586877421,
       "keyFiles": [
         "AI_DETECTION_GUIDE.md",
         "DETECTOR_TECHNICAL.md"
@@ -108,14 +108,27 @@
       "path": "netlify",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1777500265121,
+      "lastAccessed": 1777586877436,
       "keyFiles": []
+    },
+    "out": {
+      "path": "out",
+      "purpose": "Build output",
+      "fileCount": 24,
+      "lastAccessed": 1777586877438,
+      "keyFiles": [
+        "404.html",
+        "__forms.html",
+        "__next.__PAGE__.txt",
+        "__next._full.txt",
+        "__next._head.txt"
+      ]
     },
     "public": {
       "path": "public",
       "purpose": "Public files",
       "fileCount": 15,
-      "lastAccessed": 1777500265122,
+      "lastAccessed": 1777586877441,
       "keyFiles": [
         "__forms.html",
         "favicon-amp.svg",
@@ -128,7 +141,7 @@
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 50,
-      "lastAccessed": 1777500265122,
+      "lastAccessed": 1777586877442,
       "keyFiles": [
         "aiseo_bot.js",
         "aiseo_discovery.js",
@@ -141,14 +154,14 @@
       "path": "src",
       "purpose": "Source code",
       "fileCount": 0,
-      "lastAccessed": 1777500265123,
+      "lastAccessed": 1777586877442,
       "keyFiles": []
     },
     "src/app": {
       "path": "src/app",
       "purpose": "Application code",
       "fileCount": 8,
-      "lastAccessed": 1777500265123,
+      "lastAccessed": 1777586877443,
       "keyFiles": [
         "favicon.ico",
         "favicon.svg.tsx",
@@ -159,7 +172,7 @@
       "path": "src/components",
       "purpose": "UI components",
       "fileCount": 7,
-      "lastAccessed": 1777500265123,
+      "lastAccessed": 1777586877443,
       "keyFiles": [
         "AnimatedBackground.tsx",
         "CursorTracker.tsx",
@@ -169,93 +182,249 @@
   },
   "hotPaths": [
     {
+      "path": "src/app/blog/[slug]/page.tsx",
+      "accessCount": 28,
+      "lastAccessed": 1777656861342,
+      "type": "file"
+    },
+    {
+      "path": "src/app/blog/page.tsx",
+      "accessCount": 15,
+      "lastAccessed": 1777670773231,
+      "type": "file"
+    },
+    {
+      "path": "src/sanity/lib/client.ts",
+      "accessCount": 14,
+      "lastAccessed": 1777656860592,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/amp-blog-posts.ts",
+      "accessCount": 11,
+      "lastAccessed": 1777651371418,
+      "type": "file"
+    },
+    {
+      "path": "scripts/migrate-blogs-to-sanity.ts",
+      "accessCount": 9,
+      "lastAccessed": 1777652137345,
+      "type": "file"
+    },
+    {
+      "path": "src/app/pricing/page.tsx",
+      "accessCount": 8,
+      "lastAccessed": 1777581900531,
+      "type": "file"
+    },
+    {
+      "path": "src/app/pricing/PricingClient.tsx",
+      "accessCount": 7,
+      "lastAccessed": 1777581753559,
+      "type": "file"
+    },
+    {
+      "path": "sanity.config.ts",
+      "accessCount": 7,
+      "lastAccessed": 1777650457271,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/ad-copy/page.tsx",
+      "accessCount": 7,
+      "lastAccessed": 1777670841653,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/ai-chatbot/page.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1777670843355,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/ai-voice/page.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1777670844712,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/email-automation/page.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1777670846011,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/google-business/page.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1777670847082,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/landing-pages/page.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1777670848258,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/review-response/page.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1777670851560,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/seo-content/page.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1777670852103,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/social-media/page.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1777670853247,
+      "type": "file"
+    },
+    {
+      "path": "src/app/globals.css",
+      "accessCount": 5,
+      "lastAccessed": 1777670787850,
+      "type": "file"
+    },
+    {
+      "path": "src/sanity/schemas/post.ts",
+      "accessCount": 4,
+      "lastAccessed": 1777656859908,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/ampmarketing-standards/sanity-schema-rules.md",
+      "accessCount": 4,
+      "lastAccessed": 1777657359850,
+      "type": "file"
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1777670749971,
+      "type": "file"
+    },
+    {
+      "path": "netlify.toml",
+      "accessCount": 4,
+      "lastAccessed": 1777670752215,
+      "type": "file"
+    },
+    {
+      "path": "src/app/services/lead-funnel/page.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1777670849789,
+      "type": "file"
+    },
+    {
       "path": "src/app/contact/page.tsx",
       "accessCount": 2,
       "lastAccessed": 1777562034304,
       "type": "file"
     },
     {
-      "path": "src/app/services/ai-chatbot/page.tsx",
+      "path": "scripts/swap-social-hero.ts",
       "accessCount": 2,
-      "lastAccessed": 1777562060866,
+      "lastAccessed": 1777654467932,
       "type": "file"
     },
     {
-      "path": "src/app/services/ai-voice/page.tsx",
+      "path": "src/sanity/schemas/author.ts",
       "accessCount": 2,
-      "lastAccessed": 1777562083458,
+      "lastAccessed": 1777656860239,
       "type": "file"
     },
     {
-      "path": "src/app/services/seo-content/page.tsx",
+      "path": "src/sanity/schemas/service.ts",
       "accessCount": 2,
-      "lastAccessed": 1777562107529,
+      "lastAccessed": 1777656870922,
       "type": "file"
     },
     {
-      "path": "src/app/services/landing-pages/page.tsx",
+      "path": "src/sanity/schemas/category.ts",
       "accessCount": 2,
-      "lastAccessed": 1777562129604,
+      "lastAccessed": 1777656872461,
       "type": "file"
     },
     {
-      "path": "src/app/services/social-media/page.tsx",
+      "path": ".claude/skills/ampmarketing-standards/SKILL.md",
       "accessCount": 2,
-      "lastAccessed": 1777562151679,
+      "lastAccessed": 1777657311215,
       "type": "file"
     },
     {
-      "path": "src/app/services/ad-copy/page.tsx",
+      "path": ".claude/skills/ampmarketing-standards/brand-voice.md",
       "accessCount": 2,
-      "lastAccessed": 1777562171423,
+      "lastAccessed": 1777657312026,
       "type": "file"
     },
     {
-      "path": "src/app/services/email-automation/page.tsx",
+      "path": ".claude/skills/ampmarketing-standards/content-standards.md",
       "accessCount": 2,
-      "lastAccessed": 1777562191125,
+      "lastAccessed": 1777657312739,
       "type": "file"
     },
     {
-      "path": "src/app/services/google-business/page.tsx",
+      "path": ".claude/skills/ampmarketing-standards/technical-standards.md",
       "accessCount": 2,
-      "lastAccessed": 1777562212511,
+      "lastAccessed": 1777657313158,
       "type": "file"
     },
     {
-      "path": "src/app/services/review-response/page.tsx",
+      "path": ".claude/skills/ampmarketing-standards/deploy-checklist.md",
       "accessCount": 2,
-      "lastAccessed": 1777562231553,
+      "lastAccessed": 1777657314507,
       "type": "file"
     },
     {
-      "path": "src/app/pricing/page.tsx",
+      "path": "src/app/sitemap.ts",
       "accessCount": 2,
-      "lastAccessed": 1777562422306,
+      "lastAccessed": 1777670701715,
       "type": "file"
     },
     {
-      "path": "src/app/pricing/PricingClient.tsx",
+      "path": "src/app/robots.ts",
       "accessCount": 2,
-      "lastAccessed": 1777562485522,
+      "lastAccessed": 1777670702693,
       "type": "file"
     },
     {
-      "path": "src/app/blog/page.tsx",
+      "path": "src/app/contact/layout.tsx",
       "accessCount": 2,
-      "lastAccessed": 1777562518439,
+      "lastAccessed": 1777670703907,
       "type": "file"
     },
     {
-      "path": "src/app/blog/[slug]/page.tsx",
+      "path": "eslint.config.mjs",
       "accessCount": 2,
-      "lastAccessed": 1777562563584,
+      "lastAccessed": 1777670721294,
       "type": "file"
     },
     {
-      "path": "netlify.toml",
+      "path": "src/app/services/page.tsx",
       "accessCount": 2,
-      "lastAccessed": 1777562569132,
+      "lastAccessed": 1777670808616,
+      "type": "file"
+    },
+    {
+      "path": "next.config.ts",
+      "accessCount": 1,
+      "lastAccessed": 1777652948191,
+      "type": "file"
+    },
+    {
+      "path": "src/components/Hero.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1777656871632,
+      "type": "file"
+    },
+    {
+      "path": "docs/SITE_AUDIT_2026-05-01.md",
+      "accessCount": 1,
+      "lastAccessed": 1777670369332,
       "type": "file"
     }
   ],

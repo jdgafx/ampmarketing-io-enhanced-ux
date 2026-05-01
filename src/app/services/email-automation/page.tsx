@@ -1,11 +1,21 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Human-Like Follow Ups Sequences",
   description: "Employ smart email sequences that successfully convert subscribers into customers.",
   keywords: ["email automation services", "automated email sequences", "email marketing automation", "drip campaign setup", "abandoned cart email recovery", "email follow-up automation", "B2B email sequences", "email nurture campaigns", "automated lead follow-up emails", "email automation agency", "best email automation for small business", "cold email sequences", "welcome email automation", "email marketing agency"],
+  openGraph: {
+    title: "Email Automation Sequences | AMP Marketing",
+    description: "Employ smart email sequences that successfully convert subscribers into customers.",
+    url: "https://ampmarketing-io-enhanced-ux.netlify.app/services/email-automation",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://ampmarketing-io-enhanced-ux.netlify.app/services/email-automation",
+  },
 };
 
 const faqs = [

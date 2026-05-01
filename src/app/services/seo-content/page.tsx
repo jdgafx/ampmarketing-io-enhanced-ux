@@ -1,11 +1,21 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Content That Ranks",
   description: "Expert articles your audience will read and trust. Boost your site traffic with well-researched, SEO-optimized content.",
   keywords: ["SEO content writing service", "SEO articles for business", "content marketing services", "blog writing service", "organic traffic growth", "keyword-optimized content", "SEO copywriting agency", "AI-assisted SEO writing", "long-form SEO content", "rank on Google with content", "SEO blog posts for small business", "content marketing agency", "best SEO writing service 2025", "Bing search ranking content"],
+  openGraph: {
+    title: "SEO Content Writing | AMP Marketing",
+    description: "Expert articles your audience will read and trust. Boost your site traffic with well-researched, SEO-optimized content.",
+    url: "https://ampmarketing-io-enhanced-ux.netlify.app/services/seo-content",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://ampmarketing-io-enhanced-ux.netlify.app/services/seo-content",
+  },
 };
 
 const faqs = [

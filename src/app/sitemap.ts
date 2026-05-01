@@ -3,7 +3,7 @@ import { getAllPostSlugs } from '@/sanity/lib/client';
 
 export const dynamic = 'force-static';
 
-const baseUrl = 'https://melodic-flow-enhanced-ux.netlify.app';
+const baseUrl = 'https://ampmarketing-io-enhanced-ux.netlify.app';
 
 const staticRoutes = [
   '',

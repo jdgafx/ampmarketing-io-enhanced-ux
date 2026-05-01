@@ -1,8 +1,9 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "AI Solutions & Services",
   description: "Help with AI to grow your business and increase the leads. We build tools that work from attracting customers to handling calls.",
   keywords: ["AI marketing services", "business automation services", "lead generation tools", "AI chatbot service", "AI voice receptionist service", "marketing automation agency", "Nashua NH marketing services", "Bing Ads management services", "Google Ads management services", "AI-powered marketing solutions", "automated sales tools for business", "digital marketing services near me", "best AI marketing tools 2025"],

@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     description: "We help you automate lead capture and sales follow-ups with smart technology that actually works.",
     images: [
       {
-        url: "/logo-amp-marketing.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "AMP Marketing - Solutions That Scale",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AMP Marketing | Smart Tools That Grow Your Business",
     description: "We help you automate lead capture and sales follow-ups with smart technology that actually works.",
-    images: ["/logo-amp-marketing.svg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,

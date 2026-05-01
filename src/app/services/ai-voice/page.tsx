@@ -1,11 +1,21 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "AI Voice Receptionist",
   description: "AI-powered phone answering that works 24/7 so you never miss a call again.",
   keywords: ["AI voice receptionist", "automated phone answering service", "AI phone system for business", "virtual receptionist for small business", "24/7 call answering service", "missed call solution", "AI appointment booking by phone", "AI phone agent", "automated call handling", "never miss a call again", "AI receptionist cost", "virtual phone receptionist agency", "best AI voice agent 2025", "phone answering bot for business"],
+  openGraph: {
+    title: "AI Voice Receptionist | AMP Marketing",
+    description: "AI-powered phone answering that works 24/7 so you never miss a call again.",
+    url: "https://ampmarketing-io-enhanced-ux.netlify.app/services/ai-voice",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://ampmarketing-io-enhanced-ux.netlify.app/services/ai-voice",
+  },
 };
 
 const faqs = [

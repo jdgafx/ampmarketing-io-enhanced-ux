@@ -1,11 +1,21 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Reputation Management System",
   description: "Automated review responses that sound personal and professional. Every review gets a reply within 24 hours.",
   keywords: ["reputation management service", "automated review responses", "Google review management", "Yelp review response service", "online reputation management", "review monitoring service", "business review management", "customer feedback automation", "AI review response", "respond to Google reviews automatically", "negative review management", "review generation service", "online reviews for business", "best reputation management agency 2025"],
+  openGraph: {
+    title: "Automated Review Response | AMP Marketing",
+    description: "Automated review responses that sound personal and professional. Every review gets a reply within 24 hours.",
+    url: "https://ampmarketing-io-enhanced-ux.netlify.app/services/review-response",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://ampmarketing-io-enhanced-ux.netlify.app/services/review-response",
+  },
 };
 
 const faqs = [

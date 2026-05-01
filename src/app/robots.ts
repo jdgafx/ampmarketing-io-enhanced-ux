@@ -7,8 +7,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/private/', '/admin/'],
+      disallow: ['/private/', '/admin/', '/studio/'],
     },
-    sitemap: 'https://melodic-flow-enhanced-ux.netlify.app/sitemap.xml',
+    sitemap: 'https://ampmarketing-io-enhanced-ux.netlify.app/sitemap.xml',
   };
 }

@@ -92,7 +92,7 @@ export default async function BlogPage() {
     try {
         const sanityPosts = await getPosts();
         posts = sanityPosts && sanityPosts.length > 0
-            ? [...sanityPosts, ...fallbackPosts]
+            ? sanityPosts
             : [...fallbackPosts];
     } catch {
         posts = [...fallbackPosts];

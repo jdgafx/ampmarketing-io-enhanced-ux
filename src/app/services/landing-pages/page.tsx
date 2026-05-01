@@ -1,11 +1,21 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "High-Converting Pages",
   description: "Pages designed to convert visitors into paying customers. Simple, quick, and user-friendly.",
   keywords: ["landing page design service", "high-converting landing pages", "lead capture page design", "landing page agency", "conversion rate optimization", "mobile-optimized landing pages", "custom landing page builder", "landing page for lead generation", "fast loading landing pages", "A/B tested landing pages", "landing page copywriting", "best landing page agency 2025", "PPC landing page design", "Bing Ads landing pages"],
+  openGraph: {
+    title: "High-Converting Landing Pages | AMP Marketing",
+    description: "Pages designed to convert visitors into paying customers. Simple, quick, and user-friendly.",
+    url: "https://ampmarketing-io-enhanced-ux.netlify.app/services/landing-pages",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://ampmarketing-io-enhanced-ux.netlify.app/services/landing-pages",
+  },
 };
 
 const faqs = [

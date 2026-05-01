@@ -39,9 +39,12 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  cursor: none;
   position: relative;
   min-height: 100vh;
+}
+
+@media (hover: hover) {
+  body { cursor: none; }
 }
 
 /* ============== Global background ============== */
