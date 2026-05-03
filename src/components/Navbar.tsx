@@ -30,7 +30,7 @@ export default function Navbar() {
     <>
       <div className="tape-top">
         <div className="shell">
-          <div>ai marketing systems that <strong>actually ship</strong> <span className="dotsep">·</span> month-to-month</div>
+          <div>ai marketing systems that <strong>actually ship</strong></div>
           <div>amp marketing · est nashua, nh · <strong>v2.0</strong></div>
         </div>
       </div>
