@@ -33,7 +33,7 @@ const SLUG_IMAGE_MAP = {
   'google-business-profile-free-marketing-tool-2025':
     '1573804633927-bfcbcd909acd', // Google search interface on laptop
   'google-ads-2025-manual-bidding-costing-you-money':
-    '1460925895917-afdab827c52f', // Business analytics on laptop
+    '1454165804606-c3d57bc86b40', // Two professionals reviewing ad strategy — distinct from reviews analytics image
   'ai-voice-agent-convert-leads-without-cold-calls':
     '1531746790731-6c087fecd65a', // AI/robot hand (artificial agent)
   'why-every-small-business-needs-an-ai-chatbot-2025':
